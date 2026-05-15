@@ -540,11 +540,13 @@
 
   /* CLIENTS */
   .clients{background:var(--ink-3);padding:120px 50px}
-  .clients-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);max-width:1340px;margin:60px auto 0}
-  .client{aspect-ratio:1.7/1;background:var(--ink-4);display:grid;place-items:center;font-family:"Montserrat";font-weight:300;font-size:16px;color:rgba(255,255,255,.4);letter-spacing:-0.01em;transition:.4s;position:relative;overflow:hidden}
+  .clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);max-width:1340px;margin:60px auto 0}
+  .client{aspect-ratio:1.7/1;background:var(--ink-4);display:grid;place-items:center;transition:.4s;position:relative;overflow:hidden;padding:20px}
   .client::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 120%, rgba(4,202,130,.18), transparent 60%);opacity:0;transition:.4s}
-  .client:hover{color:#fff;background:#0a1011}
+  .client:hover{background:#0a1011}
   .client:hover::after{opacity:1}
+  .client img{width:65%;height:auto;max-height:54%;object-fit:contain;filter:brightness(0) invert(1);opacity:0.35;transition:opacity .4s}
+  .client:hover img{opacity:0.75}
 
   /* CTA */
   .cta{
@@ -598,7 +600,7 @@
   @media (max-width:1100px){
     .team-grid{grid-template-columns:repeat(2,1fr)}
     .focus-grid{grid-template-columns:repeat(2,1fr)}
-    .clients-grid{grid-template-columns:repeat(3,1fr)}
+    .clients-grid{grid-template-columns:repeat(2,1fr)}
     .section-h1{font-size:56px}
     .cta-h{font-size:100px}
     .purpose-statement{font-size:36px}
@@ -991,16 +993,14 @@
       <p style="font-family:Montserrat;font-weight:300;font-size:18px;color:var(--fg-2);max-width:380px;line-height:1.55">A proven client base from sovereign developers and hospitality groups to private commissions and research institutions.</p>
     </div>
     <div class="clients-grid reveal">
-      <div class="client">NEOM</div>
-      <div class="client">Red&nbsp;Sea&nbsp;Global</div>
-      <div class="client">Emaar</div>
-      <div class="client">Aldar</div>
-      <div class="client">DAMAC</div>
-      <div class="client">Diriyah&nbsp;Co.</div>
-      <div class="client">Six&nbsp;Senses</div>
-      <div class="client">Aman</div>
-      <div class="client">IHG</div>
-      <div class="client">Marriott</div>
+      <div class="client"><img src="assets/Logos/BYD_Auto_2022_logo.svg" alt="BYD" /></div>
+      <div class="client"><img src="assets/Logos/Double Like.webp" alt="Double Like" /></div>
+      <div class="client"><img src="assets/Logos/dubai-roads-transport-authority.png" alt="Dubai RTA" /></div>
+      <div class="client"><img src="assets/Logos/eagle-hills-0EhBhtWNL0.png" alt="Eagle Hills" /></div>
+      <div class="client"><img src="assets/Logos/MAF.jpg" alt="Majid Al Futtaim" /></div>
+      <div class="client"><img src="assets/Logos/OCEAYA_BLACK LOGO WHITE BK.jpg" alt="Oceaya" /></div>
+      <div class="client"><img src="assets/Logos/pcfc.svg" alt="PCFC" /></div>
+      <div class="client"><img src="assets/Logos/SF_Marina_PO_svart.jpg" alt="SF Marina" /></div>
     </div>
   </div>
 </section>
@@ -1078,7 +1078,7 @@
       links:["LinkedIn","Mail"]
     },
     {
-      num:"02", name:"Ahmed Attaya", role:"Partner · [Role placeholder]",
+      num:"02", name:"Ahmed Ataya", role:"Partner · [Role placeholder]",
       img:"assets/attaya.png",
       bio:"[Bio placeholder — drop Ahmed Attaya's background here.]",
       stats:[{k:"YEARS",v:"—"},{k:"PROJECTS",v:"—"},{k:"AWARDS",v:"—"}],

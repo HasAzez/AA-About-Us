@@ -592,32 +592,106 @@
   /* utilities */
   .container{max-width:1340px;margin:0 auto}
 
-  /* responsive */
-  @media (max-width: 1100px){
+  /* ── responsive ── */
+
+  /* Tablet */
+  @media (max-width:1100px){
     .team-grid{grid-template-columns:repeat(2,1fr)}
     .focus-grid{grid-template-columns:repeat(2,1fr)}
     .clients-grid{grid-template-columns:repeat(3,1fr)}
-.section-h1{font-size:56px}
+    .section-h1{font-size:56px}
     .cta-h{font-size:100px}
     .purpose-statement{font-size:36px}
+    .foot-grid{grid-template-columns:repeat(2,1fr);gap:40px}
   }
+
+  /* Large mobile */
+  @media (max-width:768px){
+    .logo-stage{width:80vw;height:auto}
+    .logo-img{width:60vw}
+    .logo-ring{width:84vw!important;height:84vw!important}
+    .logo-ring.r2{width:58vw!important;height:58vw!important}
+    .logo-ring.r3{width:38vw!important;height:38vw!important}
+    #hero-tagline{left:50%;max-width:85vw;text-align:center;transform:translateY(-52%) translateX(calc(-50% + 60px))}
+    #hero-tagline.visible{transform:translateY(-52%) translateX(-50%)}
+    #hero-tagline .tl-lg{font-size:clamp(32px,7vw,54px)}
+    #hero-tagline .tl-md{font-size:clamp(14px,3.5vw,22px)}
+    #hero-subtext{display:none}
+    .hero-cutout-frame{width:70%;height:52%}
+    .model-section{height:70vh}
+    .model-label{left:20px;bottom:20px}
+    .purpose-pin{height:auto}
+    .purpose{position:static;height:auto;padding:80px 40px}
+    .focus-card{padding:32px 24px 100px;min-height:auto}
+    .card{height:420px}
+    .clients-grid{grid-template-columns:repeat(2,1fr)}
+    .client{aspect-ratio:1.4/1}
+    .cta{padding:120px 40px}
+    .foot-grid{grid-template-columns:repeat(2,1fr);gap:32px}
+  }
+
+  /* Mobile */
   @media (max-width:680px){
     .burger{top:14px;right:20px}
-    .vision-block{grid-template-columns:1fr;gap:16px}
+    .section{padding:80px 20px}
+    .section-h1{font-size:38px}
+    .section-head{margin-bottom:48px}
+    .hero-frame{inset:14px 18px}
+    .hero-gauge{display:none}
+    .hero-bottom{padding:0 20px;font-size:11px}
+    .logo-stage{width:90vw;height:auto}
+    .logo-img{width:65vw}
+    #hero-tagline{display:none}
+    .hero-content .wordmark{font-size:11px;letter-spacing:.4em}
+    .hero-tag{font-size:15px;max-width:90vw}
+    .hero-cutout-frame{width:82%;height:48%;border-radius:18px}
+    .vision-block{grid-template-columns:1fr;gap:16px;padding:32px 0 32px 20px}
     .vision-num{flex-direction:row;align-items:center;gap:12px}
     .vision-num span{font-size:22px}
     .vision-p{font-size:16px}
-    .section{padding:80px 20px}
-    .clients,.cta,footer{padding-left:20px;padding-right:20px}
     .team-grid,.focus-grid{grid-template-columns:1fr}
+    .clients,.cta,footer{padding-left:20px;padding-right:20px}
     .clients-grid{grid-template-columns:repeat(2,1fr)}
-    .section-h1{font-size:42px}
-    .cta-h{font-size:60px}
-    .purpose-statement{font-size:26px}
-    .hero-bottom{padding:0 20px;font-size:11px}
-    .hero-frame{inset:14px 18px}
-    .logo-stage{width:90vw;height:auto}
-    .logo-img{width:65vw}
+    .client{aspect-ratio:1.2/1;font-size:13px}
+    .purpose-statement{font-size:26px;margin:24px auto 0}
+    .purpose{padding:80px 20px}
+    .focus-card{padding:24px 20px 60px}
+    .focus-num{font-size:32px}
+    .focus-title{font-size:18px}
+    .cta{padding:80px 20px}
+    .cta-h{font-size:52px}
+    .cta-eyebrow{letter-spacing:.2em}
+    .card{height:360px}
+    footer{padding:60px 20px 20px}
+    .foot-grid{grid-template-columns:1fr;gap:28px}
+    .foot-bottom{flex-direction:column;gap:12px;text-align:center}
+    .foot-bottom .links{justify-content:center}
+    .model-label{left:20px;bottom:20px;font-size:10px}
+  }
+
+  /* Small phone */
+  @media (max-width:480px){
+    .burger{top:12px;right:12px}
+    .section{padding:60px 16px}
+    .section-h1{font-size:30px}
+    .hero-cutout-frame{width:90%;height:44%;border-radius:14px}
+    .wordmark{font-size:10px;letter-spacing:.3em;gap:8px}
+    .hero-tag{font-size:13px}
+    .hero-bottom{font-size:10px;bottom:80px}
+    .vision-p{font-size:14px;line-height:1.6}
+    .vision-num span{font-size:18px}
+    .purpose-statement{font-size:22px}
+    .cta-h{font-size:36px}
+    .cta-eyebrow{font-size:10px;letter-spacing:.15em}
+    .cta-btn{padding:14px 18px;font-size:12px}
+    .clients-grid{grid-template-columns:1fr}
+    .client{aspect-ratio:2/1}
+    .foot-grid{gap:20px}
+    .partner-card{font-size:12px;padding:0 16px}
+    .model-section{height:55vh}
+    .card{height:300px}
+    .face-back h3{font-size:22px}
+    .face-back .bio{font-size:13px}
   }
 </style>
 </head>

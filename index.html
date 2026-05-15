@@ -607,6 +607,10 @@
 
   /* Large mobile */
   @media (max-width:768px){
+    .model-section{display:none}
+    .hero-caustic-svg{display:none}
+    #greenRippleBar{display:none}
+    #hero-mask{display:none}
     .logo-stage{width:80vw;height:auto}
     .logo-img{width:60vw}
     .logo-ring{width:84vw!important;height:84vw!important}
@@ -969,7 +973,7 @@
         <div class="label">04 — Our Team</div>
         <h2 class="section-h1" style="margin-top:24px">The minds behind<br/>the <em>shoreline</em>.</h2>
       </div>
-      <p class="team-intro">Architects, engineers, ecologists and storytellers — assembled around a single belief: that water is not the edge of the city, but its next frontier. <span style="color:var(--aqua)">Hover any card to read more.</span></p>
+      <p class="team-intro">Founded by Ahmed Youssef around a single belief: that water is not the edge of the city, but its next frontier.</p>
     </div>
 
     <div class="team-grid" id="teamGrid"></div>
@@ -1050,6 +1054,8 @@
 </footer>
 
 <script>
+  const isMobile = window.matchMedia('(pointer:coarse),(max-width:768px)').matches;
+
   // ---- Wordmark stagger ----
   (function(){
     const word = "AQUATIC  ARCHITECTS";
@@ -1072,38 +1078,10 @@
       links:["LinkedIn","Mail"]
     },
     {
-      num:"02", name:"Layla Haddad", role:"Partner · Director of design",
-      img:null,
-      bio:"Leads the studio's design language across hospitality, residential and civic typologies. Previously senior associate at SOM London with a focus on tall-building hydrology and adaptive façades.",
-      stats:[{k:"YEARS",v:"12"},{k:"PROJECTS",v:"28"},{k:"AWARDS",v:"6"}],
-      links:["LinkedIn","Mail"]
-    },
-    {
-      num:"03", name:"Mateo Rivera", role:"Head of marine engineering",
-      img:null,
-      bio:"Oversees structural performance for floating platforms, modular pontoons and tidal-resilient foundations. Co-author of two Acclimation™ patents covering dynamic mooring systems.",
-      stats:[{k:"YEARS",v:"15"},{k:"PROJECTS",v:"31"},{k:"PATENTS",v:"2"}],
-      links:["LinkedIn","Mail"]
-    },
-    {
-      num:"04", name:"Nora Al‑Mansoori", role:"Director of ecology & regenerative systems",
-      img:null,
-      bio:"Marine biologist turned ecological designer. Embeds biodiversity strategies — coral substrates, mangrove edges, fish-shelter foundations — into every project from masterplan to detail.",
-      stats:[{k:"YEARS",v:"11"},{k:"SITES",v:"19"},{k:"PUBLISH.",v:"24"}],
-      links:["LinkedIn","Mail"]
-    },
-    {
-      num:"05", name:"Tomás Kuroda", role:"Studio lead · Experience",
-      img:null,
-      bio:"Shapes the cinematic logic of arrival, threshold, and dwell. Background spans theatrical set design, hospitality interiors, and immersive environments for HNWIs and resort operators.",
-      stats:[{k:"YEARS",v:"9"},{k:"VENUES",v:"22"},{k:"COUNTRIES",v:"14"}],
-      links:["LinkedIn","Mail"]
-    },
-    {
-      num:"06", name:"Iris Bergström", role:"Director of climate & regulation",
-      img:null,
-      bio:"Translates climate models, maritime law and zoning frameworks into design constraints. Steers projects through planning approvals across the Gulf, Mediterranean, and Nordic seas.",
-      stats:[{k:"YEARS",v:"14"},{k:"REGIONS",v:"9"},{k:"REVIEWS",v:"60+"}],
+      num:"02", name:"Ahmed Attaya", role:"Partner · [Role placeholder]",
+      img:"assets/attaya.png",
+      bio:"[Bio placeholder — drop Ahmed Attaya's background here.]",
+      stats:[{k:"YEARS",v:"—"},{k:"PROJECTS",v:"—"},{k:"AWARDS",v:"—"}],
       links:["LinkedIn","Mail"]
     }
   ];
@@ -1238,7 +1216,7 @@
   })();
 
   // ---- Boat cursor ----
-  (function(){
+  if (!isMobile) (function(){
     const el = document.createElement('div');
     el.id = 'boat-cursor';
     const img = new Image();
@@ -1280,14 +1258,14 @@
   })();
 
   // ---- Subtle parallax on hero bg ----
-  window.addEventListener('scroll', () => {
+  if (!isMobile) window.addEventListener('scroll', () => {
     const y = window.scrollY;
     const hero = document.querySelector('.hero');
     if (y < 1000 && hero) hero.style.setProperty('--py', (y*0.15)+'px');
   }, {passive:true});
 
   // ---- Blotch reveal on black overlay ----
-  (function () {
+  if (!isMobile) (function () {
     const hero   = document.querySelector('.hero');
     const canvas = document.getElementById('hero-mask');
     if (!hero || !canvas) return;
@@ -1384,7 +1362,7 @@
   })();
 
   // ---- Ocean text displacement hover ----
-  (function () {
+  if (!isMobile) (function () {
     const target  = document.querySelector('#hero-tagline .tl-lg .tl-word');
     const turbEl  = document.getElementById('oceanTurb');
     const dispEl  = document.getElementById('oceanDisp');
@@ -1440,7 +1418,7 @@
 
   // ---- Hero scroll gate — blocks next-section scroll until tagline animation completes ----
   (function () {
-    let gateOpen    = false;
+    let gateOpen    = isMobile;
     let triggered   = false;
     const tagline   = document.getElementById('hero-tagline');
     const subtextEl = document.getElementById('hero-subtext');
@@ -1542,7 +1520,7 @@
   })();
 
   // ---- Constellation starfield (team section) ----
-  (function () {
+  if (!isMobile) (function () {
     const section = document.querySelector('.team');
     const canvas  = document.getElementById('starCanvas');
     if (!section || !canvas) return;
@@ -1677,7 +1655,7 @@
   })();
 
   // ---- Green chromatic-aberration ripple (hero top) ----
-  (function () {
+  if (!isMobile) (function () {
     const SIM_W = 320;
     const SIM_H = 80;
     const DAMP  = 0.984;
@@ -1781,8 +1759,10 @@
   })();
 </script>
 <script type="module">
-  import { initScene } from '/src/scene.js';
-  initScene();
+  if (!window.matchMedia('(pointer:coarse),(max-width:768px)').matches) {
+    const { initScene } = await import('/src/scene.js');
+    initScene();
+  }
 </script>
 </body>
 </html>

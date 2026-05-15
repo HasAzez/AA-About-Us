@@ -599,7 +599,10 @@
   .face-back .topline{display:flex;align-items:center;justify-content:space-between;font-family:"Oswald";font-size:11px;letter-spacing:.2em;color:var(--aqua);text-transform:uppercase}
   .face-back h3{font-family:"Montserrat";font-weight:300;font-size:30px;letter-spacing:-0.025em;margin-top:24px;color:#fff;line-height:1.05}
   .face-back .role{font-family:"Overpass";font-size:13px;color:var(--fg-2);margin-top:8px}
-  .face-back .bio{font-family:"Montserrat";font-weight:300;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.78);margin-top:22px;letter-spacing:-0.005em}
+  .face-back .bio{font-family:"Montserrat";font-weight:300;font-size:14.5px;line-height:1.55;color:rgba(255,255,255,.78);margin-top:22px;letter-spacing:-0.005em;overflow-y:auto;max-height:160px;padding-right:8px}
+  .face-back .bio::-webkit-scrollbar{width:2px}
+  .face-back .bio::-webkit-scrollbar-track{background:transparent}
+  .face-back .bio::-webkit-scrollbar-thumb{background:var(--aqua);border-radius:2px}
   .face-back .stats{margin-top:auto;padding-top:24px;border-top:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
   .stat .v{font-family:"Montserrat";font-weight:300;font-size:22px;letter-spacing:-0.02em;color:#fff}
   .stat .k{font-family:"Overpass";font-size:11px;color:var(--fg-3);letter-spacing:.06em;margin-top:4px}
@@ -1167,14 +1170,14 @@
     {
       num:"01", name:"Ahmed Youssef", role:"Founder & Principal Architect",
       img:"assets/founder.png", bgPos:"center 15%",
-      bio:"Founding partner and principal architect of Aquatic Architects. Creator of the patented Acclimation™ methodology for floating and climate-responsive marine architecture. B.Arch, American University of Dubai.",
+      bio:"Ahmed Youssef is the Founding Partner and Principal Architect of Aquatic Architects. After being awarded the Future Urban Thinkers competition by Dubai Land Department, he founded Aquatic Architects as a specialized studio focused on floating architecture and urban planning beyond the waterfront, originating from the MENA region. He is the creator of the patented Acclimation methodology, the core philosophy behind the company's work, shaping projects that adapt to environmental, cultural, regulatory, and economic conditions over time. His work has helped position Aquatic Architects as a specialist in real world water based developments, from adaptive urban concepts to deployable floating platforms and residences.",
       stats:[{k:"YEARS",v:"17+"},{k:"PROJECTS",v:"42"},{k:"PATENTS",v:"3"}],
       links:["LinkedIn","Mail"]
     },
     {
       num:"02", name:"Ahmad Ataya", role:"Founding Partner",
       img:"assets/attaya.png",
-      bio:"[Bio placeholder — drop Ahmed Attaya's background here.]",
+      bio:"Founding Partner of Aquatic Architects, Ahmad Ataya leads the company's strategic communications, partnerships, and commercial positioning. He supports the growth and development of Aquatic Architects' floating real estate and water based infrastructure portfolio, helping translate its design vision into market ready opportunities.",
       stats:[{k:"YEARS",v:"—"},{k:"PROJECTS",v:"—"},{k:"AWARDS",v:"—"}],
       links:["LinkedIn","Mail"]
     }

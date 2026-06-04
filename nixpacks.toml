@@ -1,0 +1,9 @@
+# Coolify default build pack (Nixpacks). No lockfile: use npm install, not npm ci.
+[phases.install]
+cmds = ["npm install"]
+
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm run start"

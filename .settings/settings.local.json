@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(mkdir -p \"/tmp/design_bundle\")",
+      "Bash(tar -xf \"C:/Users/owgue/.claude/projects/c--Users-owgue-OneDrive-Desktop-AA-ABOUT/403e2353-5dc2-4b1c-8dee-551deacab143/tool-results/design_extracted.json\" -C \"/tmp/design_bundle\")",
+      "Read(//tmp/**)",
+      "PowerShell(python -c \"from PIL import Image; print\\('ok'\\)\")",
+      "PowerShell(python3 --version 2>$null)",
+      "PowerShell(py --version 2>$null)",
+      "PowerShell(node --version)",
+      "Bash(node server.js)",
+      "Bash(netstat -ano)",
+      "Bash(start http://localhost:3000)",
+      "Bash(npx vite *)",
+      "Bash(Get-Content \"C:\\\\Users\\\\owgue\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-owgue-OneDrive-Desktop-AA-ABOUT\\\\403e2353-5dc2-4b1c-8dee-551deacab143\\\\tasks\\\\bm2zdlv30.output\")",
+      "Bash(npm run *)",
+      "Bash(findstr :5173)",
+      "Bash(Get-ChildItem -Recurse \"C:\\\\Users\\\\owgue\\\\OneDrive\\\\Desktop\\\\AA ABOUT\\\\dist\")",
+      "Bash(Select-Object FullName)",
+      "PowerShell(Get-ChildItem -Recurse \"C:\\\\Users\\\\owgue\\\\OneDrive\\\\Desktop\\\\AA ABOUT\\\\dist\" | ForEach-Object { $_.FullName })",
+      "Bash(dir /s /b \"c:\\\\Users\\\\owgue\\\\OneDrive\\\\Desktop\\\\AA ABOUT\\\\assets\")"
+    ]
+  }
+}

@@ -8,8 +8,13 @@ const MIME = {
   '.css':  'text/css',
   '.png':  'image/png',
   '.jpg':  'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp',
+  '.svg':  'image/svg+xml',
+  '.mp4':  'video/mp4',
   '.glb':  'model/gltf-binary',
   '.gltf': 'model/gltf+json',
+  '.hdr':  'application/octet-stream',
   '.woff2':'font/woff2',
   '.woff': 'font/woff',
 };
@@ -18,7 +23,7 @@ const PORT = 3000;
 const ROOT = __dirname;
 
 http.createServer(function (req, res) {
-  var url      = req.url.split('?')[0];
+  var url      = decodeURIComponent(req.url.split('?')[0]);
   var filePath = path.join(ROOT, url === '/' ? 'index.html' : url);
 
   fs.readFile(filePath, function (err, data) {

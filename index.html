@@ -428,7 +428,8 @@
     color:var(--aqua);text-transform:uppercase;padding-top:5px;
     display:flex;flex-direction:column;gap:8px;align-items:flex-start;
   }
-  .vision-num span{font-size:32px;letter-spacing:-.02em;color:rgba(255,255,255,0.1);font-weight:400;line-height:1}
+  .vision-num span:first-child{font-size:32px;letter-spacing:-.02em;color:#fff;font-weight:400;line-height:1}
+  .vision-num span:last-child{font-size:19px}
   .vision-p{
     font-family:"Montserrat";font-weight:300;font-size:19px;
     line-height:1.72;color:rgba(255,255,255,0.82);letter-spacing:-0.012em;text-wrap:pretty;
@@ -726,7 +727,7 @@
     .hero-cutout-frame{width:82%;height:48%;border-radius:18px}
     .vision-block{grid-template-columns:1fr;gap:16px;padding:32px 0 32px 20px}
     .vision-num{flex-direction:row;align-items:center;gap:12px}
-    .vision-num span{font-size:22px}
+    .vision-num span:first-child{font-size:22px}
     .vision-p{font-size:16px}
     .team-grid,.focus-grid{grid-template-columns:1fr}
     .clients,.cta,footer{padding-left:20px;padding-right:20px}
@@ -758,7 +759,7 @@
     .hero-tag{font-size:13px}
     .hero-bottom{font-size:10px;bottom:80px}
     .vision-p{font-size:14px;line-height:1.6}
-    .vision-num span{font-size:18px}
+    .vision-num span:first-child{font-size:18px}
     .purpose-statement{font-size:22px}
     .cta-h{font-size:36px}
     .cta-eyebrow{font-size:10px;letter-spacing:.15em}
@@ -787,40 +788,73 @@
   .lang-toggle:hover{border-color:var(--aqua-soft);background:rgba(4,202,130,0.12)}
 
   /* ---- Arabic / RTL overrides ---- */
-  [dir="rtl"] body,[dir="rtl"] button,[dir="rtl"] input{font-family:"Cairo",sans-serif}
-  [dir="rtl"] .label{letter-spacing:0.04em}
+
+  /* Cairo font for all text elements */
+  [dir="rtl"] body,[dir="rtl"] button,[dir="rtl"] input,
+  [dir="rtl"] p,[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4,
+  [dir="rtl"] .label,[dir="rtl"] .section-num,[dir="rtl"] .section-h1,
+  [dir="rtl"] .vision-p,[dir="rtl"] .vision-num,[dir="rtl"] .focus-title,
+  [dir="rtl"] .focus-desc,[dir="rtl"] .team-intro,[dir="rtl"] .bio,[dir="rtl"] .role,
+  [dir="rtl"] .cta-h,[dir="rtl"] .cta-eyebrow,[dir="rtl"] .model-intro-h,
+  [dir="rtl"] .model-intro-body,[dir="rtl"] .purpose-statement,
+  [dir="rtl"] .mobile-nav-drawer a,[dir="rtl"] .mobile-nav-tag,
+  [dir="rtl"] .foot-col a,[dir="rtl"] .foot-col p,[dir="rtl"] .foot-col h4,
+  [dir="rtl"] .foot-bottom,[dir="rtl"] #hero-subtext,[dir="rtl"] #hero-tagline{
+    font-family:"Cairo",sans-serif;
+  }
+
+  /* Zero out Latin letter-spacing for Arabic */
+  [dir="rtl"] .label,[dir="rtl"] .section-num,[dir="rtl"] .vision-num,
+  [dir="rtl"] .focus-title,[dir="rtl"] .focus-desc,[dir="rtl"] .team-intro,
+  [dir="rtl"] .bio,[dir="rtl"] .role,[dir="rtl"] .mobile-nav-tag,
+  [dir="rtl"] .foot-col a,[dir="rtl"] .foot-col p,[dir="rtl"] .foot-col h4,
+  [dir="rtl"] .foot-bottom,[dir="rtl"] .model-intro-body,
+  [dir="rtl"] #hero-subtext,[dir="rtl"] .cta-eyebrow{letter-spacing:0}
+  [dir="rtl"] .section-h1,[dir="rtl"] .cta-h,[dir="rtl"] .purpose-statement,
+  [dir="rtl"] .model-intro-h,[dir="rtl"] #hero-tagline{letter-spacing:-.01em}
+
+  /* Right-align all content text — the core RTL fix */
+  [dir="rtl"] p,[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4,
+  [dir="rtl"] .label,[dir="rtl"] .section-num,[dir="rtl"] .vision-num,
+  [dir="rtl"] .vision-p,[dir="rtl"] .focus-title,[dir="rtl"] .focus-desc,
+  [dir="rtl"] .team-intro,[dir="rtl"] .bio,[dir="rtl"] .role,
+  [dir="rtl"] .cta-eyebrow,[dir="rtl"] .mobile-nav-drawer a,
+  [dir="rtl"] .mobile-nav-tag,[dir="rtl"] .foot-col,[dir="rtl"] .foot-col *,
+  [dir="rtl"] .arrow,[dir="rtl"] .est,[dir="rtl"] .section-h1{text-align:right}
+
+  /* Fixed-position elements — swap sides */
   [dir="rtl"] .burger{right:auto;left:50px}
   [dir="rtl"] .lang-toggle{left:auto;right:50px}
-  [dir="rtl"] .mobile-nav-drawer{left:0;right:auto;border-left:none;border-right:1px solid var(--line);transform:translateX(-100%)}
-  [dir="rtl"] .mobile-nav.open .mobile-nav-drawer{transform:translateX(0)}
   [dir="rtl"] .hero-gauge{left:auto;right:50px}
-  [dir="rtl"] .hero-bottom{flex-direction:row-reverse}
+
+  /* Hero side texts — swap left/right in RTL */
+  [dir="rtl"] #hero-tagline{left:auto;right:3.5%;text-align:right}
+  [dir="rtl"] #hero-subtext{right:auto;left:3.5%;text-align:left}
+
+  /* Mobile nav — slide in from left in RTL */
+  [dir="rtl"] .mobile-nav-drawer{
+    left:0;right:auto;
+    border-left:none;border-right:1px solid var(--line);
+    transform:translateX(-100%);
+  }
+  [dir="rtl"] .mobile-nav.open .mobile-nav-drawer{transform:translateX(0)}
+
+  /* Vision section */
   [dir="rtl"] .vision-block{padding:48px 28px 48px 0}
   [dir="rtl"] .vision-block::before{left:auto;right:0}
   [dir="rtl"] .vision-split-text{border-left:none;border-right:1px solid var(--line)}
   [dir="rtl"] .vision-split-caption{left:auto;right:24px}
-  [dir="rtl"] .section-head{flex-direction:row-reverse}
-  [dir="rtl"] .arrow{flex-direction:row-reverse}
-  [dir="rtl"] .foot-grid{direction:rtl}
-  [dir="rtl"] .foot-bottom{flex-direction:row-reverse}
-  [dir="rtl"] .mobile-nav-tag{letter-spacing:0}
-  [dir="rtl"] .wordmark{letter-spacing:0.2em;font-size:12px}
-  [dir="rtl"] .purpose-inner{font-family:"Cairo",sans-serif}
-  [dir="rtl"] .purpose-statement{font-family:"Cairo",sans-serif;letter-spacing:-.01em}
-  [dir="rtl"] .vision-p{font-family:"Cairo",sans-serif;letter-spacing:0;font-size:18px}
-  [dir="rtl"] .focus-desc{font-family:"Cairo",sans-serif;letter-spacing:0}
-  [dir="rtl"] .section-h1{font-family:"Cairo",sans-serif;letter-spacing:-.02em}
-  [dir="rtl"] .team-intro{font-family:"Cairo",sans-serif;letter-spacing:0}
-  [dir="rtl"] .hero-tag{font-family:"Cairo",sans-serif;letter-spacing:0}
-  [dir="rtl"] #hero-subtext{font-family:"Cairo",sans-serif;letter-spacing:0}
-  [dir="rtl"] #hero-tagline{font-family:"Cairo",sans-serif;letter-spacing:-.02em}
-  [dir="rtl"] .bio{font-family:"Cairo",sans-serif;letter-spacing:0}
-  [dir="rtl"] .role{font-family:"Cairo",sans-serif;letter-spacing:0}
-  [dir="rtl"] .foot-col a,[dir="rtl"] .foot-col p,[dir="rtl"] .foot-col h4{font-family:"Cairo",sans-serif;letter-spacing:0}
-  [dir="rtl"] .foot-bottom{font-family:"Cairo",sans-serif;letter-spacing:0}
-  [dir="rtl"] .cta-h{font-family:"Cairo",sans-serif;letter-spacing:-.02em}
-  [dir="rtl"] .model-intro-h{font-family:"Cairo",sans-serif}
-  [dir="rtl"] .model-intro-body{font-family:"Cairo",sans-serif;letter-spacing:0}
+  [dir="rtl"] .vision-num{align-items:flex-end}
+
+  /* CTA — heading stays centered, rest right-aligns */
+  [dir="rtl"] .cta-h{text-align:center}
+
+  /* Team cards */
+  [dir="rtl"] .flip-hint{right:auto;left:24px}
+  [dir="rtl"] .ribbon{flex-direction:row-reverse}
+
+  /* Wordmark */
+  [dir="rtl"] .wordmark{letter-spacing:0.15em;font-size:12px}
 </style>
 </head>
 <body>

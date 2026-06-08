@@ -6,7 +6,7 @@
 <title>Aquatic Architects — About</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Overpass:wght@300;400;500;700&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700&family=Overpass:wght@300;400;500;700&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
   :root{
     --ink:#0c0f0f;
@@ -772,6 +772,55 @@
     .face-back h3{font-size:22px}
     .face-back .bio{font-size:13px}
   }
+
+  /* ---- Language toggle ---- */
+  .lang-toggle{
+    position:fixed;top:22px;left:50px;z-index:99998;
+    padding:0 18px;height:42px;
+    display:grid;place-items:center;
+    border:1px solid rgba(255,255,255,0.25);
+    background:rgba(0,0,0,0.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    color:#fff;font-family:"Montserrat",sans-serif;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;cursor:pointer;
+    transition:border-color .25s,background .25s;
+  }
+  .lang-toggle:hover{border-color:var(--aqua-soft);background:rgba(4,202,130,0.12)}
+
+  /* ---- Arabic / RTL overrides ---- */
+  [dir="rtl"] body,[dir="rtl"] button,[dir="rtl"] input{font-family:"Cairo",sans-serif}
+  [dir="rtl"] .label{letter-spacing:0.04em}
+  [dir="rtl"] .burger{right:auto;left:50px}
+  [dir="rtl"] .lang-toggle{left:auto;right:50px}
+  [dir="rtl"] .mobile-nav-drawer{left:0;right:auto;border-left:none;border-right:1px solid var(--line);transform:translateX(-100%)}
+  [dir="rtl"] .mobile-nav.open .mobile-nav-drawer{transform:translateX(0)}
+  [dir="rtl"] .hero-gauge{left:auto;right:50px}
+  [dir="rtl"] .hero-bottom{flex-direction:row-reverse}
+  [dir="rtl"] .vision-block{padding:48px 28px 48px 0}
+  [dir="rtl"] .vision-block::before{left:auto;right:0}
+  [dir="rtl"] .vision-split-text{border-left:none;border-right:1px solid var(--line)}
+  [dir="rtl"] .vision-split-caption{left:auto;right:24px}
+  [dir="rtl"] .section-head{flex-direction:row-reverse}
+  [dir="rtl"] .arrow{flex-direction:row-reverse}
+  [dir="rtl"] .foot-grid{direction:rtl}
+  [dir="rtl"] .foot-bottom{flex-direction:row-reverse}
+  [dir="rtl"] .mobile-nav-tag{letter-spacing:0}
+  [dir="rtl"] .wordmark{letter-spacing:0.2em;font-size:12px}
+  [dir="rtl"] .purpose-inner{font-family:"Cairo",sans-serif}
+  [dir="rtl"] .purpose-statement{font-family:"Cairo",sans-serif;letter-spacing:-.01em}
+  [dir="rtl"] .vision-p{font-family:"Cairo",sans-serif;letter-spacing:0;font-size:18px}
+  [dir="rtl"] .focus-desc{font-family:"Cairo",sans-serif;letter-spacing:0}
+  [dir="rtl"] .section-h1{font-family:"Cairo",sans-serif;letter-spacing:-.02em}
+  [dir="rtl"] .team-intro{font-family:"Cairo",sans-serif;letter-spacing:0}
+  [dir="rtl"] .hero-tag{font-family:"Cairo",sans-serif;letter-spacing:0}
+  [dir="rtl"] #hero-subtext{font-family:"Cairo",sans-serif;letter-spacing:0}
+  [dir="rtl"] #hero-tagline{font-family:"Cairo",sans-serif;letter-spacing:-.02em}
+  [dir="rtl"] .bio{font-family:"Cairo",sans-serif;letter-spacing:0}
+  [dir="rtl"] .role{font-family:"Cairo",sans-serif;letter-spacing:0}
+  [dir="rtl"] .foot-col a,[dir="rtl"] .foot-col p,[dir="rtl"] .foot-col h4{font-family:"Cairo",sans-serif;letter-spacing:0}
+  [dir="rtl"] .foot-bottom{font-family:"Cairo",sans-serif;letter-spacing:0}
+  [dir="rtl"] .cta-h{font-family:"Cairo",sans-serif;letter-spacing:-.02em}
+  [dir="rtl"] .model-intro-h{font-family:"Cairo",sans-serif}
+  [dir="rtl"] .model-intro-body{font-family:"Cairo",sans-serif;letter-spacing:0}
 </style>
 </head>
 <body>
@@ -818,13 +867,16 @@
 <div class="mobile-nav" id="mobileNav">
   <div class="mobile-nav-backdrop" id="mobileNavBackdrop"></div>
   <div class="mobile-nav-drawer">
-    <a href="#">Projects</a>
-    <a href="#" class="active">About</a>
-    <a href="#">Media &amp; Awards</a>
-    <a href="#">Contact</a>
-    <div class="mobile-nav-tag">An aquatic studio — est. 2009</div>
+    <a href="#" data-i18n="nav.projects">Projects</a>
+    <a href="#" class="active" data-i18n="nav.about">About</a>
+    <a href="#" data-i18n="nav.media">Media &amp; Awards</a>
+    <a href="#" data-i18n="nav.contact">Contact</a>
+    <div class="mobile-nav-tag" data-i18n="nav.tag">An aquatic studio — est. 2009</div>
   </div>
 </div>
+
+<!-- Language toggle -->
+<button class="lang-toggle" id="langToggle" aria-label="Switch language">عربي</button>
 
 <!-- BURGER (fixed, hero-only) -->
 <button class="burger" aria-label="Menu"><span></span></button>
@@ -900,16 +952,16 @@
   </div>
 
   <div id="hero-tagline" aria-hidden="true">
-    <span class="tl-sm"><span class="tl-word">The</span></span>
-    <span class="tl-lg"><span class="tl-word"><em>Ocean</em></span></span>
-    <span class="tl-md">
+    <span class="tl-sm" data-i18n="hero.tl.sm"><span class="tl-word">The</span></span>
+    <span class="tl-lg" data-i18n="hero.tl.lg"><span class="tl-word"><em>Ocean</em></span></span>
+    <span class="tl-md" data-i18n="hero.tl.md">
       <span class="tl-word">Is</span>
       <span class="tl-word"> Our</span>
       <span class="tl-word"> Blueprint</span>
     </span>
   </div>
 
-  <div id="hero-subtext" aria-hidden="true">
+  <div id="hero-subtext" aria-hidden="true" data-i18n="hero.subtext">
     A UAE born aquatic architecture firm shaping <em>climate responsive</em> floating architecture and water based infrastructure.
   </div>
 
@@ -944,8 +996,8 @@
   </div>
 
   <div class="hero-bottom">
-    <span class="est">Founded MMIX · Patented Acclimation™ methodology</span>
-    <span class="scroll-cue"><span>Scroll for more</span><span class="line"></span></span>
+    <span class="est" data-i18n="hero.est">Founded MMIX · Patented Acclimation™ methodology</span>
+    <span class="scroll-cue"><span data-i18n="hero.scroll">Scroll for more</span><span class="line"></span></span>
   </div>
 </section>
 
@@ -953,13 +1005,13 @@
 <section class="model-section" id="glbSection">
   <div class="model-intro" id="modelIntro">
     <div class="model-intro-inner">
-      <div class="label model-intro-label">Acclimation™ — Interactive Model</div>
-      <h2 class="model-intro-h">Architecture<br/>That <em>Adapts.</em></h2>
-      <p class="model-intro-body">A conceptual model of Acclimation showing how adaptive floating cities can shift, respond, and evolve with environmental, cultural, regulatory, and economic conditions.</p>
+      <div class="label model-intro-label" data-i18n="model.label">Acclimation™ — Interactive Model</div>
+      <h2 class="model-intro-h" data-i18n="model.h">Architecture<br/>That <em>Adapts.</em></h2>
+      <p class="model-intro-body" data-i18n="model.body">A conceptual model of Acclimation showing how adaptive floating cities can shift, respond, and evolve with environmental, cultural, regulatory, and economic conditions.</p>
     </div>
   </div>
   <canvas id="glbCanvas" style="opacity:0;transition:opacity 1.2s ease"></canvas>
-  <div class="model-label" style="opacity:0;transition:opacity 1.2s ease 0.4s">Acclimation™ — interactive model</div>
+  <div class="model-label" style="opacity:0;transition:opacity 1.2s ease 0.4s" data-i18n="model.label2">Acclimation™ — interactive model</div>
 </section>
 
 <!-- OUR VISION -->
@@ -967,22 +1019,22 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <div class="label">01 — Our Vision</div>
-        <h2 class="section-h1" style="margin-top:24px">A Founder Led Vision<br/>for <em>Life on Water</em></h2>
+        <div class="label" data-i18n="vision.label">01 — Our Vision</div>
+        <h2 class="section-h1" style="margin-top:24px" data-i18n="vision.h">A Founder Led Vision<br/>for <em>Life on Water</em></h2>
       </div>
     </div>
 
     <div class="vision-split reveal">
       <div class="vision-split-img">
         <img src="assets/founder-vision.jpg" alt="Founder Led Vision" />
-        <div class="vision-split-caption"><span class="label">Ahmed Youssef · Founder</span></div>
+        <div class="vision-split-caption"><span class="label" data-i18n="vision.caption">Ahmed Youssef · Founder</span></div>
       </div>
       <div class="vision-split-text">
-        <p class="vision-p" style="font-size:22px;line-height:1.65;color:rgba(255,255,255,0.9)">A belief that architecture on water must do more than float. It must <em>adapt, perform, and evolve</em> with the world around it.</p>
+        <p class="vision-p" style="font-size:22px;line-height:1.65;color:rgba(255,255,255,0.9)" data-i18n="vision.quote">A belief that architecture on water must do more than float. It must <em>adapt, perform, and evolve</em> with the world around it.</p>
         <div style="margin-top:48px;display:flex;gap:48px;flex-wrap:wrap">
-          <div><div style="font-family:Montserrat;font-weight:200;font-size:48px;letter-spacing:-0.04em;color:#fff">17<em style="color:var(--aqua);font-style:normal">+</em></div><div style="font-family:Overpass;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);margin-top:6px">Years of practice</div></div>
-          <div><div style="font-family:Montserrat;font-weight:200;font-size:48px;letter-spacing:-0.04em;color:#fff">42</div><div style="font-family:Overpass;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);margin-top:6px">Projects delivered</div></div>
-          <div><div style="font-family:Montserrat;font-weight:200;font-size:48px;letter-spacing:-0.04em;color:#fff">3</div><div style="font-family:Overpass;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);margin-top:6px">Patents held</div></div>
+          <div><div style="font-family:Montserrat;font-weight:200;font-size:48px;letter-spacing:-0.04em;color:#fff">17<em style="color:var(--aqua);font-style:normal">+</em></div><div style="font-family:Overpass;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);margin-top:6px" data-i18n="vision.stat1">Years of practice</div></div>
+          <div><div style="font-family:Montserrat;font-weight:200;font-size:48px;letter-spacing:-0.04em;color:#fff">42</div><div style="font-family:Overpass;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);margin-top:6px" data-i18n="vision.stat2">Projects delivered</div></div>
+          <div><div style="font-family:Montserrat;font-weight:200;font-size:48px;letter-spacing:-0.04em;color:#fff">3</div><div style="font-family:Overpass;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-3);margin-top:6px" data-i18n="vision.stat3">Patents held</div></div>
         </div>
       </div>
     </div>
@@ -990,23 +1042,23 @@
     <div class="vision-blocks">
 
       <div class="vision-block reveal">
-        <div class="vision-num"><span>01</span>Origin</div>
-        <p class="vision-p">Aquatic Architects was shaped by Ahmed Youssef's belief that architecture on water must do more than float. It must adapt, perform, and evolve with the conditions around it. Long before Acclimation became a patented and award winning methodology, it began as a vision for how the built environment could behave more like a living system, capable of responding to climate, movement, human behavior, regulation, and long term economic value.</p>
+        <div class="vision-num"><span>01</span><span data-i18n="vision.origin">Origin</span></div>
+        <p class="vision-p" data-i18n="vision.p1">Aquatic Architects was shaped by Ahmed Youssef's belief that architecture on water must do more than float. It must adapt, perform, and evolve with the conditions around it. Long before Acclimation became a patented and award winning methodology, it began as a vision for how the built environment could behave more like a living system, capable of responding to climate, movement, human behavior, regulation, and long term economic value.</p>
       </div>
 
       <div class="vision-block reveal reveal-d2">
-        <div class="vision-num"><span>02</span>Catalyst</div>
-        <p class="vision-p">This thinking was first expressed through the <strong>Adaptive City</strong> project, which explored how cities could expand, contract, open, close, and recalibrate over time rather than remain fixed and rigid. For Ahmed, water was not a constraint to be engineered around. <em>It was a new habitat for urban growth,</em> one that could unlock mobility, flexibility, resource efficiency, and new ways of living.</p>
+        <div class="vision-num"><span>02</span><span data-i18n="vision.catalyst">Catalyst</span></div>
+        <p class="vision-p" data-i18n="vision.p2">This thinking was first expressed through the <strong>Adaptive City</strong> project, which explored how cities could expand, contract, open, close, and recalibrate over time rather than remain fixed and rigid. For Ahmed, water was not a constraint to be engineered around. <em>It was a new habitat for urban growth,</em> one that could unlock mobility, flexibility, resource efficiency, and new ways of living.</p>
       </div>
 
       <div class="vision-block reveal reveal-d3">
-        <div class="vision-num"><span>03</span>Methodology</div>
-        <p class="vision-p">From this foundation, <strong>Acclimation</strong> became the core methodology of Aquatic Architects. It reframes architecture as a responsive system rather than a static object, guiding how environments are conceived, structured, and deployed across environmental, cultural, regulatory, and economic conditions. The methodology draws from the logic of natural adaptation, where organisms evolve anatomically, physiologically, and behaviorally in response to their habitat.</p>
+        <div class="vision-num"><span>03</span><span data-i18n="vision.method">Methodology</span></div>
+        <p class="vision-p" data-i18n="vision.p3">From this foundation, <strong>Acclimation</strong> became the core methodology of Aquatic Architects. It reframes architecture as a responsive system rather than a static object, guiding how environments are conceived, structured, and deployed across environmental, cultural, regulatory, and economic conditions. The methodology draws from the logic of natural adaptation, where organisms evolve anatomically, physiologically, and behaviorally in response to their habitat.</p>
       </div>
 
       <div class="vision-block reveal reveal-d4">
-        <div class="vision-num"><span>04</span>Application</div>
-        <p class="vision-p">Applied to architecture, this means creating water based environments that are not only visually distinctive, but capable of maintaining performance, relevance, safety, comfort, and identity over time. This is the philosophy behind Aquatic Architects' work, from <strong>Adaptive City</strong> to <strong>Aqua Pod</strong> and <strong>Lapillus</strong>, translating ambitious ideas into real world projects designed for deployment, not speculation.</p>
+        <div class="vision-num"><span>04</span><span data-i18n="vision.apply">Application</span></div>
+        <p class="vision-p" data-i18n="vision.p4">Applied to architecture, this means creating water based environments that are not only visually distinctive, but capable of maintaining performance, relevance, safety, comfort, and identity over time. This is the philosophy behind Aquatic Architects' work, from <strong>Adaptive City</strong> to <strong>Aqua Pod</strong> and <strong>Lapillus</strong>, translating ambitious ideas into real world projects designed for deployment, not speculation.</p>
       </div>
 
     </div>
@@ -1017,8 +1069,8 @@
 <div class="purpose-pin">
   <section class="section purpose" data-screen-label="03 Purpose">
     <div class="purpose-inner">
-      <div class="label reveal">02 — Our Purpose</div>
-      <h2 class="purpose-statement" id="purposeStmt">To advance adaptive architecture on water through <em>Acclimation,</em> creating built environments that respond to environmental, cultural, regulatory, and economic conditions over time.</h2>
+      <div class="label reveal" data-i18n="purpose.label">02 — Our Purpose</div>
+      <h2 class="purpose-statement" id="purposeStmt" data-i18n="purpose.stmt">To advance adaptive architecture on water through <em>Acclimation,</em> creating built environments that respond to environmental, cultural, regulatory, and economic conditions over time.</h2>
     </div>
   </section>
 </div>
@@ -1028,36 +1080,36 @@
   <div class="container">
     <div class="section-head reveal">
       <div>
-        <div class="label">03 — Our Core Focus</div>
-        <h2 class="section-h1" style="margin-top:24px">Four pillars,<br/>one <em>discipline</em>.</h2>
+        <div class="label" data-i18n="focus.label">03 — Our Core Focus</div>
+        <h2 class="section-h1" style="margin-top:24px" data-i18n="focus.h">Four pillars,<br/>one <em>discipline</em>.</h2>
       </div>
-      <div class="section-num">/ 04 areas of practice</div>
+      <div class="section-num" data-i18n="focus.num">/ 04 areas of practice</div>
     </div>
 
     <div class="focus-grid">
       <div class="focus-card reveal">
         <div class="focus-num">01.</div>
-        <h3 class="focus-title">Adaptive</h3>
-        <p class="focus-desc">A conceptual model of Acclimation showing how adaptive floating cities can shift, respond, and evolve with environmental, cultural, regulatory, and economic conditions.</p>
-        <div class="arrow">Read more <svg width="22" height="8" viewBox="0 0 22 8" fill="none"><path d="M0 4h20m0 0L17 1m3 3l-3 3" stroke="currentColor" stroke-width="1"/></svg></div>
+        <h3 class="focus-title" data-i18n="focus.t1">Adaptive</h3>
+        <p class="focus-desc" data-i18n="focus.d1">A conceptual model of Acclimation showing how adaptive floating cities can shift, respond, and evolve with environmental, cultural, regulatory, and economic conditions.</p>
+        <div class="arrow"><span data-i18n="common.readmore">Read more</span> <svg width="22" height="8" viewBox="0 0 22 8" fill="none"><path d="M0 4h20m0 0L17 1m3 3l-3 3" stroke="currentColor" stroke-width="1"/></svg></div>
       </div>
       <div class="focus-card reveal reveal-d2">
         <div class="focus-num">02.</div>
-        <h3 class="focus-title">Environmental</h3>
-        <p class="focus-desc">Integrating natural systems into every design decision, ensuring harmony between built environments and surrounding water conditions.</p>
-        <div class="arrow">Read more <svg width="22" height="8" viewBox="0 0 22 8" fill="none"><path d="M0 4h20m0 0L17 1m3 3l-3 3" stroke="currentColor" stroke-width="1"/></svg></div>
+        <h3 class="focus-title" data-i18n="focus.t2">Environmental</h3>
+        <p class="focus-desc" data-i18n="focus.d2">Integrating natural systems into every design decision, ensuring harmony between built environments and surrounding water conditions.</p>
+        <div class="arrow"><span data-i18n="common.readmore">Read more</span> <svg width="22" height="8" viewBox="0 0 22 8" fill="none"><path d="M0 4h20m0 0L17 1m3 3l-3 3" stroke="currentColor" stroke-width="1"/></svg></div>
       </div>
       <div class="focus-card reveal reveal-d3">
         <div class="focus-num">03.</div>
-        <h3 class="focus-title">Context Driven</h3>
-        <p class="focus-desc">Each project is shaped by its climate, culture, regulations, commercial model, and intended use.</p>
-        <div class="arrow">Read more <svg width="22" height="8" viewBox="0 0 22 8" fill="none"><path d="M0 4h20m0 0L17 1m3 3l-3 3" stroke="currentColor" stroke-width="1"/></svg></div>
+        <h3 class="focus-title" data-i18n="focus.t3">Context Driven</h3>
+        <p class="focus-desc" data-i18n="focus.d3">Each project is shaped by its climate, culture, regulations, commercial model, and intended use.</p>
+        <div class="arrow"><span data-i18n="common.readmore">Read more</span> <svg width="22" height="8" viewBox="0 0 22 8" fill="none"><path d="M0 4h20m0 0L17 1m3 3l-3 3" stroke="currentColor" stroke-width="1"/></svg></div>
       </div>
       <div class="focus-card reveal reveal-d4">
         <div class="focus-num">04.</div>
-        <h3 class="focus-title">Built to Evolve</h3>
-        <p class="focus-desc">Our work is designed for real world deployment, long term performance, and future adaptation.</p>
-        <div class="arrow">Read more <svg width="22" height="8" viewBox="0 0 22 8" fill="none"><path d="M0 4h20m0 0L17 1m3 3l-3 3" stroke="currentColor" stroke-width="1"/></svg></div>
+        <h3 class="focus-title" data-i18n="focus.t4">Built to Evolve</h3>
+        <p class="focus-desc" data-i18n="focus.d4">Our work is designed for real world deployment, long term performance, and future adaptation.</p>
+        <div class="arrow"><span data-i18n="common.readmore">Read more</span> <svg width="22" height="8" viewBox="0 0 22 8" fill="none"><path d="M0 4h20m0 0L17 1m3 3l-3 3" stroke="currentColor" stroke-width="1"/></svg></div>
       </div>
     </div>
   </div>
@@ -1069,10 +1121,10 @@
   <div class="container">
     <div class="team-head reveal">
       <div>
-        <div class="label">04 — Our Team</div>
-        <h2 class="section-h1" style="margin-top:24px">Trusted by clients and partners shaping the future of <em>life on water.</em></h2>
+        <div class="label" data-i18n="team.label">04 — Our Team</div>
+        <h2 class="section-h1" style="margin-top:24px" data-i18n="team.h">Trusted by clients and partners shaping the future of <em>life on water.</em></h2>
       </div>
-      <p class="team-intro">Aquatic Architects works with developers, government entities, hospitality groups, private clients, and strategic partners across floating architecture, water based infrastructure, and coastal development.</p>
+      <p class="team-intro" data-i18n="team.intro">Aquatic Architects works with developers, government entities, hospitality groups, private clients, and strategic partners across floating architecture, water based infrastructure, and coastal development.</p>
     </div>
 
     <div class="team-grid" id="teamGrid"></div>
@@ -1084,10 +1136,10 @@
   <div class="container">
     <div class="section-head reveal" style="margin-bottom:0">
       <div>
-        <div class="label">05 — Our Partners</div>
-        <h2 class="section-h1" style="margin-top:24px">Trusted across<br/>aquatic and <em>coastal</em> development.</h2>
+        <div class="label" data-i18n="clients.label">05 — Our Partners</div>
+        <h2 class="section-h1" style="margin-top:24px" data-i18n="clients.h">Trusted across<br/>aquatic and <em>coastal</em> development.</h2>
       </div>
-      <p style="font-family:Montserrat;font-weight:300;font-size:18px;color:var(--fg-2);max-width:380px;line-height:1.55">A proven client base from sovereign developers and hospitality groups to private commissions and research institutions.</p>
+      <p style="font-family:Montserrat;font-weight:300;font-size:18px;color:var(--fg-2);max-width:380px;line-height:1.55" data-i18n="clients.desc">A proven client base from sovereign developers and hospitality groups to private commissions and research institutions.</p>
     </div>
     <div class="clients-grid reveal">
       <div class="client"><img src="assets/Logos/MAF.png" alt="Majid Al Futtaim" /></div>
@@ -1104,10 +1156,10 @@
 
 <!-- CTA -->
 <section class="cta" data-screen-label="07 CTA">
-  <div class="cta-eyebrow">06 — Begin a project</div>
-  <h2 class="cta-h">Share your<br/><em>vision.</em></h2>
+  <div class="cta-eyebrow" data-i18n="cta.eyebrow">06 — Begin a project</div>
+  <h2 class="cta-h" data-i18n="cta.h">Share your<br/><em>vision.</em></h2>
   <button class="cta-btn">
-    <span>Get in touch</span>
+    <span data-i18n="cta.btn">Get in touch</span>
     <span class="arr"><svg width="20" height="8" viewBox="0 0 20 8" fill="none"><path d="M0 4h18m0 0l-3-3m3 3l-3 3" stroke="currentColor" stroke-width="1"/></svg></span>
   </button>
 </section>
@@ -1117,23 +1169,23 @@
   <div class="foot-grid">
     <div>
       <img class="foot-logo" src="assets/aa-logo.png" alt="Aquatic Architects" />
-      <p style="color:var(--fg-3);max-width:260px;font-size:13px;line-height:1.55">An aquatic studio building climate-responsive architecture on water — since 2009.</p>
+      <p style="color:var(--fg-3);max-width:260px;font-size:13px;line-height:1.55" data-i18n="foot.desc">An aquatic studio building climate-responsive architecture on water — since 2009.</p>
     </div>
     <div class="foot-col">
-      <h4>Studio</h4>
-      <a href="#">About</a>
-      <a href="#">Projects</a>
-      <a href="#">Our Realm</a>
-      <a href="#">Media &amp; Awards</a>
+      <h4 data-i18n="foot.studio">Studio</h4>
+      <a href="#" data-i18n="foot.about">About</a>
+      <a href="#" data-i18n="foot.projects">Projects</a>
+      <a href="#" data-i18n="foot.realm">Our Realm</a>
+      <a href="#" data-i18n="foot.media">Media &amp; Awards</a>
     </div>
     <div class="foot-col">
-      <h4>Contact</h4>
+      <h4 data-i18n="foot.contact.h">Contact</h4>
       <p>+1 (555) 123‑4567</p>
       <p>123 Ocean Drive,<br/>Coastal City, CC 12345</p>
       <a href="#">hello@aquatic-architects.com</a>
     </div>
     <div class="foot-col">
-      <h4>Follow</h4>
+      <h4 data-i18n="foot.follow">Follow</h4>
       <div class="socials">
         <a href="#" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg></a>
         <a href="#" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v8M8 7v.01M12 18v-5a3 3 0 016 0v5"/></svg></a>
@@ -1142,16 +1194,17 @@
     </div>
   </div>
   <div class="foot-bottom">
-    <span>© 2026 Aquatic Architects. All rights reserved.</span>
+    <span data-i18n="foot.copy">© 2026 Aquatic Architects. All rights reserved.</span>
     <div class="links">
-      <a href="#">Terms &amp; conditions</a>
-      <a href="#">Privacy policy</a>
+      <a href="#" data-i18n="foot.terms">Terms &amp; conditions</a>
+      <a href="#" data-i18n="foot.privacy">Privacy policy</a>
     </div>
   </div>
 </footer>
 
 <script>
   const isMobile = window.matchMedia('(pointer:coarse),(max-width:768px)').matches;
+  let currentLang = localStorage.getItem('lang') || 'en';
 
   // ---- Wordmark stagger ----
   (function(){
@@ -1169,21 +1222,28 @@
   const team = [
     {
       num:"01", name:"Ahmed Youssef", role:"Founder & Principal Architect",
+      role_ar:"المؤسس والمعماري الرئيسي",
       img:"assets/founder.png", bgPos:"center 15%",
       bio:"Ahmed Youssef is the Founding Partner and Principal Architect of Aquatic Architects. After being awarded the Future Urban Thinkers competition by Dubai Land Department, he founded Aquatic Architects as a specialized studio focused on floating architecture and urban planning beyond the waterfront, originating from the MENA region. He is the creator of the patented Acclimation methodology, the core philosophy behind the company's work, shaping projects that adapt to environmental, cultural, regulatory, and economic conditions over time. His work has helped position Aquatic Architects as a specialist in real world water based developments, from adaptive urban concepts to deployable floating platforms and residences.",
-      stats:[{k:"YEARS",v:"17+"},{k:"PROJECTS",v:"42"},{k:"PATENTS",v:"3"}],
+      bio_ar:"أحمد يوسف هو الشريك المؤسس والمعماري الرئيسي لـ Aquatic Architects. بعد فوزه بمسابقة المفكرين الحضريين المستقبليين التي نظمتها دائرة الأراضي والأملاك في دبي، أسس Aquatic Architects كاستوديو متخصص في العمارة العائمة والتخطيط الحضري، منبثقاً من منطقة الشرق الأوسط وشمال أفريقيا. وهو مبتكر منهجية Acclimation المسجلة، الفلسفة الجوهرية التي تقوم عليها أعمال الشركة، ويُشكّل مشاريع تتكيف مع الظروف البيئية والثقافية والتنظيمية والاقتصادية. وقد أسهم عمله في ترسيخ مكانة Aquatic Architects متخصصاً في التطوير المائي الواقعي، من المفاهيم الحضرية التكيفية إلى المنصات العائمة والمساكن القابلة للنشر.",
+      stats:[{k:"YEARS",k_ar:"سنوات",v:"17+"},{k:"PROJECTS",k_ar:"مشاريع",v:"42"},{k:"PATENTS",k_ar:"براءات",v:"3"}],
       links:["LinkedIn","Mail"]
     },
     {
       num:"02", name:"Ahmad Ataya", role:"Founding Partner",
+      role_ar:"الشريك المؤسس",
       img:"assets/attaya.png",
       bio:"Founding Partner of Aquatic Architects, Ahmad Ataya leads the company's strategic communications, partnerships, and commercial positioning. He supports the growth and development of Aquatic Architects' floating real estate and water based infrastructure portfolio, helping translate its design vision into market ready opportunities.",
-      stats:[{k:"YEARS",v:"—"},{k:"PROJECTS",v:"—"},{k:"AWARDS",v:"—"}],
+      bio_ar:"الشريك المؤسس لـ Aquatic Architects، يقود أحمد عطية الاتصالات الاستراتيجية للشركة وشراكاتها وتموضعها التجاري. يدعم نمو وتطوير محفظة Aquatic Architects في العقارات العائمة والبنية التحتية المائية، مساهماً في ترجمة رؤيتها التصميمية إلى فرص جاهزة للسوق.",
+      stats:[{k:"YEARS",k_ar:"سنوات",v:"—"},{k:"PROJECTS",k_ar:"مشاريع",v:"—"},{k:"AWARDS",k_ar:"جوائز",v:"—"}],
       links:["LinkedIn","Mail"]
     }
   ];
 
   function makeCard(p, i){
+    const ar = currentLang === 'ar';
+    const role = ar && p.role_ar ? p.role_ar : p.role;
+    const bio  = ar && p.bio_ar  ? p.bio_ar  : p.bio;
     const photo = p.img
       ? `<div class="ph" style="--bg:url('${p.img}');--bg-pos:${p.bgPos||'center'}"></div>`
       : `<div class="placeholder">[ portrait — drop ${p.name.split(' ')[0]} headshot ]</div>`;
@@ -1194,23 +1254,23 @@
             <div class="ribbon"><span><span class="dot"></span>Aquatic Architects</span><span>${p.num}/${String(team.length).padStart(2,'0')}</span></div>
             <div class="flip-hint">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12a9 9 0 0118-1"/><path d="M21 4v5h-5"/><path d="M21 12a9 9 0 01-18 1"/><path d="M3 20v-5h5"/></svg>
-              Flip
+              ${ar ? 'اقلب' : 'Flip'}
             </div>
             <div class="face-photo">${photo}</div>
             <div class="face-meta">
               <div>
                 <h3>${p.name}</h3>
-                <div class="role">${p.role}</div>
+                <div class="role">${role}</div>
               </div>
             </div>
           </div>
           <div class="face face-back">
-            <div class="topline"><span>${p.num} — Profile</span><span>AA / Bio</span></div>
+            <div class="topline"><span>${p.num} — ${ar ? 'الملف' : 'Profile'}</span><span>AA / ${ar ? 'سيرة' : 'Bio'}</span></div>
             <h3>${p.name}</h3>
-            <div class="role">${p.role}</div>
-            <p class="bio">${p.bio}</p>
+            <div class="role">${role}</div>
+            <p class="bio">${bio}</p>
             <div class="stats">
-              ${p.stats.map(s => `<div class="stat"><div class="v">${s.v}</div><div class="k">${s.k}</div></div>`).join('')}
+              ${p.stats.map(s => `<div class="stat"><div class="v">${s.v}</div><div class="k">${ar && s.k_ar ? s.k_ar : s.k}</div></div>`).join('')}
             </div>
             <div class="links">${p.links.map(l => `<a href="#">${l}</a>`).join('')}</div>
           </div>
@@ -1884,6 +1944,124 @@
 
     tickGreen();
   })();
+
+  // ---- i18n / Language toggle ----
+  const TRANSLATIONS = {
+    en: {
+      'nav.projects':'Projects','nav.about':'About','nav.media':'Media &amp; Awards','nav.contact':'Contact',
+      'nav.tag':'An aquatic studio — est. 2009',
+      'hero.tl.sm':'<span class="tl-word">The</span>',
+      'hero.tl.lg':'<span class="tl-word"><em>Ocean</em></span>',
+      'hero.tl.md':'<span class="tl-word">Is</span><span class="tl-word"> Our</span><span class="tl-word"> Blueprint</span>',
+      'hero.subtext':'A UAE born aquatic architecture firm shaping <em>climate responsive</em> floating architecture and water based infrastructure.',
+      'hero.est':'Founded MMIX · Patented Acclimation™ methodology',
+      'hero.scroll':'Scroll for more',
+      'model.label':'Acclimation™ — Interactive Model',
+      'model.h':'Architecture<br/>That <em>Adapts.</em>',
+      'model.body':'A conceptual model of Acclimation showing how adaptive floating cities can shift, respond, and evolve with environmental, cultural, regulatory, and economic conditions.',
+      'model.label2':'Acclimation™ — interactive model',
+      'vision.label':'01 — Our Vision',
+      'vision.h':'A Founder Led Vision<br/>for <em>Life on Water</em>',
+      'vision.caption':'Ahmed Youssef · Founder',
+      'vision.quote':'A belief that architecture on water must do more than float. It must <em>adapt, perform, and evolve</em> with the world around it.',
+      'vision.stat1':'Years of practice','vision.stat2':'Projects delivered','vision.stat3':'Patents held',
+      'vision.origin':'Origin','vision.catalyst':'Catalyst','vision.method':'Methodology','vision.apply':'Application',
+      'vision.p1':'Aquatic Architects was shaped by Ahmed Youssef\'s belief that architecture on water must do more than float. It must adapt, perform, and evolve with the conditions around it. Long before Acclimation became a patented and award winning methodology, it began as a vision for how the built environment could behave more like a living system, capable of responding to climate, movement, human behavior, regulation, and long term economic value.',
+      'vision.p2':'This thinking was first expressed through the <strong>Adaptive City</strong> project, which explored how cities could expand, contract, open, close, and recalibrate over time rather than remain fixed and rigid. For Ahmed, water was not a constraint to be engineered around. <em>It was a new habitat for urban growth,</em> one that could unlock mobility, flexibility, resource efficiency, and new ways of living.',
+      'vision.p3':'From this foundation, <strong>Acclimation</strong> became the core methodology of Aquatic Architects. It reframes architecture as a responsive system rather than a static object, guiding how environments are conceived, structured, and deployed across environmental, cultural, regulatory, and economic conditions. The methodology draws from the logic of natural adaptation, where organisms evolve anatomically, physiologically, and behaviorally in response to their habitat.',
+      'vision.p4':'Applied to architecture, this means creating water based environments that are not only visually distinctive, but capable of maintaining performance, relevance, safety, comfort, and identity over time. This is the philosophy behind Aquatic Architects\' work, from <strong>Adaptive City</strong> to <strong>Aqua Pod</strong> and <strong>Lapillus</strong>, translating ambitious ideas into real world projects designed for deployment, not speculation.',
+      'purpose.label':'02 — Our Purpose',
+      'purpose.stmt':'To advance adaptive architecture on water through <em>Acclimation,</em> creating built environments that respond to environmental, cultural, regulatory, and economic conditions over time.',
+      'focus.label':'03 — Our Core Focus','focus.h':'Four pillars,<br/>one <em>discipline</em>.','focus.num':'/ 04 areas of practice',
+      'focus.t1':'Adaptive','focus.d1':'A conceptual model of Acclimation showing how adaptive floating cities can shift, respond, and evolve with environmental, cultural, regulatory, and economic conditions.',
+      'focus.t2':'Environmental','focus.d2':'Integrating natural systems into every design decision, ensuring harmony between built environments and surrounding water conditions.',
+      'focus.t3':'Context Driven','focus.d3':'Each project is shaped by its climate, culture, regulations, commercial model, and intended use.',
+      'focus.t4':'Built to Evolve','focus.d4':'Our work is designed for real world deployment, long term performance, and future adaptation.',
+      'common.readmore':'Read more',
+      'team.label':'04 — Our Team','team.h':'Trusted by clients and partners shaping the future of <em>life on water.</em>',
+      'team.intro':'Aquatic Architects works with developers, government entities, hospitality groups, private clients, and strategic partners across floating architecture, water based infrastructure, and coastal development.',
+      'clients.label':'05 — Our Partners','clients.h':'Trusted across<br/>aquatic and <em>coastal</em> development.',
+      'clients.desc':'A proven client base from sovereign developers and hospitality groups to private commissions and research institutions.',
+      'cta.eyebrow':'06 — Begin a project','cta.h':'Share your<br/><em>vision.</em>','cta.btn':'Get in touch',
+      'foot.desc':'An aquatic studio building climate-responsive architecture on water — since 2009.',
+      'foot.studio':'Studio','foot.about':'About','foot.projects':'Projects','foot.realm':'Our Realm','foot.media':'Media &amp; Awards',
+      'foot.contact.h':'Contact','foot.follow':'Follow',
+      'foot.copy':'© 2026 Aquatic Architects. All rights reserved.',
+      'foot.terms':'Terms &amp; conditions','foot.privacy':'Privacy policy',
+    },
+    ar: {
+      'nav.projects':'مشاريع','nav.about':'من نحن','nav.media':'الإعلام والجوائز','nav.contact':'تواصل معنا',
+      'nav.tag':'استوديو مائي — تأسس 2009',
+      'hero.tl.sm':'<span class="tl-word">الـ</span>',
+      'hero.tl.lg':'<span class="tl-word"><em>محيط</em></span>',
+      'hero.tl.md':'<span class="tl-word">هو</span><span class="tl-word"> نموذجنا</span>',
+      'hero.subtext':'شركة إماراتية متخصصة في العمارة المائية، تُشكّل مستقبل الهياكل العائمة <em>المستجيبة للمناخ</em> والبنية التحتية المائية.',
+      'hero.est':'تأسست MMIX · منهجية Acclimation™ المسجلة',
+      'hero.scroll':'تمرير للمزيد',
+      'model.label':'Acclimation™ — نموذج تفاعلي',
+      'model.h':'عمارة<br/><em>تتكيّف.</em>',
+      'model.body':'نموذج مفاهيمي لـ Acclimation يُظهر كيف يمكن للمدن العائمة التكيفية أن تتحول وتستجيب وتتطور وفق الظروف البيئية والثقافية والتنظيمية والاقتصادية.',
+      'model.label2':'Acclimation™ — نموذج تفاعلي',
+      'vision.label':'01 — رؤيتنا',
+      'vision.h':'رؤية يقودها المؤسس<br/>لـ<em>حياة على الماء</em>',
+      'vision.caption':'أحمد يوسف · المؤسس',
+      'vision.quote':'إيمان بأن العمارة على الماء يجب أن تتجاوز مجرد الطفو. يجب أن <em>تتكيف، وتؤدي، وتتطور</em> مع العالم من حولها.',
+      'vision.stat1':'سنوات ممارسة','vision.stat2':'مشروع منجز','vision.stat3':'براءات اختراع',
+      'vision.origin':'النشأة','vision.catalyst':'المحفّز','vision.method':'المنهجية','vision.apply':'التطبيق',
+      'vision.p1':'شُكّلت Aquatic Architects بفضل إيمان أحمد يوسف بأن العمارة على الماء يجب أن تتجاوز مجرد الطفو، وأن تتكيف وتؤدي وتتطور مع الظروف المحيطة بها. قبل أن تصبح Acclimation منهجية مسجلة وحائزة على جوائز، بدأت كرؤية لكيفية تصرف البيئة المبنية كنظام حيوي قادر على الاستجابة للمناخ والحركة والسلوك البشري والتشريع والقيمة الاقتصادية على المدى البعيد.',
+      'vision.p2':'تجسّد هذا التفكير أولاً من خلال مشروع <strong>المدينة التكيفية (Adaptive City)</strong>، الذي استكشف كيف يمكن للمدن أن تتوسع وتنكمش وتنفتح وتنغلق وتُعيد معايرة نفسها عبر الزمن. بالنسبة لأحمد، لم يكن الماء عقبة تحتاج إلى حل هندسي. <em>كان موطناً جديداً للنمو الحضري،</em> يفتح آفاق التنقل والمرونة وكفاءة الموارد وأساليب حياة مستحدثة.',
+      'vision.p3':'من هذا الأساس، أصبحت <strong>Acclimation</strong> المنهجية الجوهرية لـ Aquatic Architects. إنها تُعيد تأطير العمارة كنظام استجابي لا كجسم ثابت، وتوجّه كيفية تصوّر البيئات وهيكلتها ونشرها عبر الظروف البيئية والثقافية والتنظيمية والاقتصادية. تستلهم المنهجية من منطق التكيف الطبيعي، حيث تتطور الكائنات تشريحياً وفسيولوجياً وسلوكياً استجابةً لبيئتها.',
+      'vision.p4':'تطبيقاً على العمارة، يعني ذلك إنشاء بيئات مائية لا تتميز بصرياً فحسب، بل تحافظ على أدائها وجدواها وسلامتها وراحتها وهويتها بمرور الوقت. هذه هي الفلسفة الكامنة وراء عمل Aquatic Architects، من <strong>المدينة التكيفية</strong> إلى <strong>Aqua Pod</strong> و<strong>Lapillus</strong>، إذ تُترجم أفكاراً طموحة إلى مشاريع واقعية مصممة للتطبيق لا للمضاربة.',
+      'purpose.label':'02 — غايتنا',
+      'purpose.stmt':'تعزيز العمارة التكيفية على الماء من خلال <em>Acclimation،</em> لخلق بيئات مبنية تستجيب للظروف البيئية والثقافية والتنظيمية والاقتصادية على مر الزمن.',
+      'focus.label':'03 — محاور عملنا','focus.h':'أربعة محاور،<br/>تخصص <em>واحد</em>.','focus.num':'/ 04 مجالات ممارسة',
+      'focus.t1':'تكيّفي','focus.d1':'نموذج مفاهيمي لـ Acclimation يُظهر كيف يمكن للمدن العائمة التكيفية أن تتحول وتستجيب وتتطور وفق الظروف البيئية والثقافية والتنظيمية والاقتصادية.',
+      'focus.t2':'بيئي','focus.d2':'دمج الأنظمة الطبيعية في كل قرار تصميمي، لضمان التناغم بين البيئات المبنية وظروف الماء المحيطة بها.',
+      'focus.t3':'يقوده السياق','focus.d3':'يتشكل كل مشروع وفق مناخه وثقافته وأنظمته ونموذجه التجاري والاستخدام المقصود منه.',
+      'focus.t4':'مصمم للتطور','focus.d4':'عملنا مصمم للتطبيق الفعلي والأداء على المدى الطويل والتكيف المستقبلي.',
+      'common.readmore':'اقرأ المزيد',
+      'team.label':'04 — فريقنا','team.h':'موثوق به من عملاء وشركاء يشكّلون مستقبل <em>الحياة على الماء.</em>',
+      'team.intro':'تعمل Aquatic Architects مع المطورين والجهات الحكومية ومجموعات الضيافة والعملاء الخاصين والشركاء الاستراتيجيين في مجالات العمارة العائمة والبنية التحتية المائية والتطوير الساحلي.',
+      'clients.label':'05 — شركاؤنا','clients.h':'موثوق به في<br/>التطوير المائي و<em>الساحلي</em>.',
+      'clients.desc':'قاعدة عملاء راسخة تضم مطورين ذوي سيادة ومجموعات ضيافة وصولاً إلى الأعمال الخاصة والمؤسسات البحثية.',
+      'cta.eyebrow':'06 — ابدأ مشروعاً','cta.h':'شارك<br/><em>رؤيتك.</em>','cta.btn':'تواصل معنا',
+      'foot.desc':'استوديو مائي يبني عمارة مستجيبة للمناخ على الماء — منذ عام 2009.',
+      'foot.studio':'الاستوديو','foot.about':'من نحن','foot.projects':'مشاريع','foot.realm':'عالمنا','foot.media':'الإعلام والجوائز',
+      'foot.contact.h':'تواصل','foot.follow':'تابعنا',
+      'foot.copy':'© 2026 Aquatic Architects. جميع الحقوق محفوظة.',
+      'foot.terms':'الشروط والأحكام','foot.privacy':'سياسة الخصوصية',
+    }
+  };
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir  = lang === 'ar' ? 'rtl' : 'ltr';
+    const t = TRANSLATIONS[lang];
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (t[key] !== undefined) el.innerHTML = t[key];
+    });
+
+    // Rebuild team cards with current lang
+    document.getElementById('teamGrid').innerHTML = team.map((p, i) => makeCard(p, i)).join('');
+    document.querySelectorAll('#teamGrid .card').forEach(card => {
+      card.addEventListener('click', () => {
+        if (matchMedia('(hover: none)').matches) card.classList.toggle('flipped');
+      });
+    });
+    document.querySelectorAll('#teamGrid .reveal').forEach(el => io.observe(el));
+
+    document.getElementById('langToggle').textContent = lang === 'ar' ? 'EN' : 'عربي';
+    localStorage.setItem('lang', lang);
+  }
+
+  document.getElementById('langToggle').addEventListener('click', () => {
+    setLang(currentLang === 'en' ? 'ar' : 'en');
+  });
+
+  if (currentLang === 'ar') setLang('ar');
 </script>
 <script type="module">
   if (!window.matchMedia('(pointer:coarse),(max-width:768px)').matches) {

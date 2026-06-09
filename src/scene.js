@@ -5,6 +5,8 @@ import { EffectComposer }  from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass }      from 'three/addons/postprocessing/RenderPass.js';
 import { SSAOPass }        from 'three/addons/postprocessing/SSAOPass.js';
 import { OutputPass }      from 'three/addons/postprocessing/OutputPass.js';
+import hdrUrl from '../assets/textures/winter_lake_01_04k.hdr?url';
+import glbUrl from '../assets/3D/Acclimation-Animation.glb?url';
 
 export function initScene() {
   const section = document.getElementById('glbSection');
@@ -31,7 +33,7 @@ export function initScene() {
   // HDR environment — IBL lighting only, not shown as background
   const pmrem = new THREE.PMREMGenerator(renderer);
   pmrem.compileEquirectangularShader();
-  new HDRLoader().load('assets/textures/winter_lake_01_04k.hdr', (hdr) => {
+  new HDRLoader().load(hdrUrl, (hdr) => {
     const envMap = pmrem.fromEquirectangular(hdr).texture;
     scene.environment = envMap;
     hdr.dispose();
@@ -113,7 +115,7 @@ export function initScene() {
   // ---- GLB loader ----
   const loader = new GLTFLoader();
   loader.load(
-    'assets/3D/Acclimation-Animation.glb',
+    glbUrl,
     (gltf) => {
       const model = gltf.scene;
       scene.add(model);

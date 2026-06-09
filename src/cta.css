@@ -1,0 +1,83 @@
+@keyframes _fg_rise {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0%);   opacity: 1; }
+}
+
+.fg-section {
+  height: 100vh;
+  height: 100svh;
+}
+
+.fg-inner {
+  display: block;
+  will-change: transform, opacity;
+  animation: _fg_rise 1.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-play-state: paused;
+}
+
+.fg-section.fg-live .fg-inner {
+  animation-play-state: running;
+}
+
+.fg-fade {
+  opacity: 0;
+  transition: opacity 0.9s ease-out 0.8s;
+}
+
+.fg-section.fg-live .fg-fade {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fg-inner { animation: none !important; }
+  .fg-fade  { opacity: 1 !important; transition: none !important; }
+}
+
+.aa-btn-link {
+  pointer-events: auto;
+  text-decoration: none;
+  color: inherit;
+}
+
+.aa-btn-base {
+  font-family: "Overpass", sans-serif;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  border-radius: 0;
+}
+
+.aa-btn-primary {
+  background: #161e1f;
+  border: 1px solid #04ca82;
+  color: #fff;
+}
+
+.aa-btn-primary:hover {
+  background: #04ca82;
+  border-color: #04ca82;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(4, 202, 130, 0.3);
+}
+
+.aa-btn-outline {
+  background: transparent;
+  border: 1px solid #139d5f;
+  color: #fff;
+}
+
+.aa-btn-outline:hover {
+  background: #04ca82;
+  border-color: #04ca82;
+}
+
+.aa-btn-ghost {
+  background: transparent;
+  border: none;
+  color: #fff;
+}
+
+.aa-btn-sm { padding: 8px 16px; font-size: 11px; }
+.aa-btn-md { padding: 15px 20px; font-size: 12px; line-height: 1.3; }
+.aa-btn-lg { padding: 16px 24px; font-size: 14px; }

@@ -622,32 +622,6 @@
   .client img{width:60%;height:60px;object-fit:contain;display:block;filter:grayscale(1);opacity:0.5;transition:filter .4s,opacity .4s}
   .client:hover img{filter:grayscale(0);opacity:1}
 
-  /* CTA */
-  .cta{
-    position:relative;padding:200px 50px;overflow:hidden;text-align:center;
-    background:
-      linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),
-      url("assets/Backgrounds/cta-bg.png") center/cover no-repeat;
-  }
-  .cta::before{
-    content:"";position:absolute;inset:0;
-    background:
-      linear-gradient(180deg, rgba(12,15,15,0.9) 0%, rgba(12,15,15,0) 30%, rgba(12,15,15,0) 70%, rgba(12,15,15,0.95) 100%);
-    pointer-events:none;
-  }
-  .cta-eyebrow{position:relative;font-family:"Oswald";color:var(--aqua);text-transform:uppercase;letter-spacing:.4em;font-size:11px}
-  .cta-h{position:relative;font-family:"Montserrat";font-weight:200;font-size:160px;line-height:.92;letter-spacing:-0.06em;color:#fff;margin-top:30px;text-wrap:balance}
-  .cta-h em{color:var(--aqua);font-style:normal;font-weight:300}
-  .cta-btn{
-    position:relative;display:inline-flex;align-items:center;gap:18px;margin-top:50px;
-    padding:18px 26px;background:var(--ink-2);border:1px solid var(--line-2);color:#fff;
-    font-family:"Overpass";font-size:13px;letter-spacing:.06em;cursor:pointer;
-    transition:background .35s, border-color .35s, padding .35s;
-  }
-  .cta-btn:hover{background:var(--aqua);border-color:var(--aqua);color:var(--ink);padding-right:36px}
-  .cta-btn .arr{display:inline-flex;transition:transform .35s}
-  .cta-btn:hover .arr{transform:translateX(6px)}
-
   /* FOOTER */
   footer{background:var(--ink-3);padding:80px 50px 30px;border-top:1px solid var(--line)}
   .foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:60px;max-width:1340px;margin:0 auto}
@@ -676,7 +650,6 @@
     .focus-grid{grid-template-columns:repeat(2,1fr)}
     .clients-grid{grid-template-columns:repeat(3,1fr)}
     .section-h1{font-size:56px}
-    .cta-h{font-size:100px}
     .purpose-statement{font-size:36px}
     .foot-grid{grid-template-columns:repeat(2,1fr);gap:40px}
     .burger{top:18px;right:35px}
@@ -715,7 +688,6 @@
     .card{height:420px}
     .clients-grid{grid-template-columns:repeat(2,1fr)}
     .client{aspect-ratio:1.4/1}
-    .cta{padding:120px 40px}
     .foot-grid{grid-template-columns:repeat(2,1fr);gap:32px}
     .lang-toggle{top:14px;left:20px;padding:0 12px;height:38px;font-size:9px;letter-spacing:.12em}
     .scroll-progress{height:1px}
@@ -740,7 +712,7 @@
     .vision-num span:first-child{font-size:22px}
     .vision-p{font-size:16px}
     .team-grid,.focus-grid{grid-template-columns:1fr}
-    .clients,.cta,footer{padding-left:20px;padding-right:20px}
+    .clients,footer{padding-left:20px;padding-right:20px}
     .clients-grid{grid-template-columns:repeat(2,1fr)}
     .client{aspect-ratio:1.2/1;font-size:13px}
     .purpose-statement{font-size:26px;margin:16px 0 0}
@@ -748,9 +720,6 @@
     .focus-card{padding:24px 20px 60px}
     .focus-num{font-size:32px}
     .focus-title{font-size:18px}
-    .cta{padding:80px 20px}
-    .cta-h{font-size:52px}
-    .cta-eyebrow{letter-spacing:.2em}
     .card{height:360px}
     footer{padding:60px 20px 20px}
     .foot-grid{grid-template-columns:1fr;gap:28px}
@@ -773,9 +742,6 @@
     .vision-p{font-size:14px;line-height:1.6}
     .vision-num span:first-child{font-size:18px}
     .purpose-statement{font-size:22px}
-    .cta-h{font-size:36px}
-    .cta-eyebrow{font-size:10px;letter-spacing:.15em}
-    .cta-btn{padding:14px 18px;font-size:12px}
     .clients-grid{grid-template-columns:1fr}
     .client{aspect-ratio:2/1}
     .foot-grid{gap:20px}
@@ -1194,14 +1160,7 @@
 </section>
 
 <!-- CTA -->
-<section class="cta" data-screen-label="07 CTA">
-  <div class="cta-eyebrow" data-i18n="cta.eyebrow">06 — Begin a project</div>
-  <h2 class="cta-h" data-i18n="cta.h">Share your<br/><em>vision.</em></h2>
-  <button class="cta-btn">
-    <span data-i18n="cta.btn">Get in touch</span>
-    <span class="arr"><svg width="20" height="8" viewBox="0 0 20 8" fill="none"><path d="M0 4h18m0 0l-3-3m3 3l-3 3" stroke="currentColor" stroke-width="1"/></svg></span>
-  </button>
-</section>
+<div id="cta-root"></div>
 
 <!-- FOOTER -->
 <footer>
@@ -1242,9 +1201,16 @@
   </div>
 </footer>
 
+<template id="vite-assets">
+  <img id="boat-cursor-src" src="assets/Cursor assets/sss.png" alt="">
+  <img id="team-founder-src" src="assets/founder.png" alt="">
+  <img id="team-attaya-src" src="assets/attaya.png" alt="">
+</template>
+
 <script>
   const isMobile = window.matchMedia('(pointer:coarse),(max-width:768px)').matches;
   let currentLang = localStorage.getItem('lang') || 'en';
+  const viteAssets = document.getElementById('vite-assets').content;
 
   // ---- Wordmark stagger ----
   (function(){
@@ -1259,11 +1225,16 @@
   })();
 
   // ---- Team data + cards ----
+  function viteAssetUrl(id) {
+    const el = viteAssets.querySelector('#' + id);
+    return el ? el.src : '';
+  }
+
   const team = [
     {
       num:"01", name:"Ahmed Youssef", role:"Founder & Principal Architect",
       role_ar:"المؤسس والمعماري الرئيسي",
-      img:"assets/founder.png", bgPos:"center 15%",
+      img: viteAssetUrl('team-founder-src'), bgPos:"center 15%",
       bio:"Ahmed Youssef is the Founding Partner and Principal Architect of Aquatic Architects. After being awarded the Future Urban Thinkers competition by Dubai Land Department, he founded Aquatic Architects as a specialized studio focused on floating architecture and urban planning beyond the waterfront, originating from the MENA region. He is the creator of the patented Acclimation methodology, the core philosophy behind the company's work, shaping projects that adapt to environmental, cultural, regulatory, and economic conditions over time. His work has helped position Aquatic Architects as a specialist in real world water based developments, from adaptive urban concepts to deployable floating platforms and residences.",
       bio_ar:"أحمد يوسف هو الشريك المؤسس والمعماري الرئيسي لـ Aquatic Architects. بعد فوزه بمسابقة المفكرين الحضريين المستقبليين التي نظمتها دائرة الأراضي والأملاك في دبي، أسس Aquatic Architects كاستوديو متخصص في العمارة العائمة والتخطيط الحضري، منبثقاً من منطقة الشرق الأوسط وشمال أفريقيا. وهو مبتكر منهجية Acclimation المسجلة، الفلسفة الجوهرية التي تقوم عليها أعمال الشركة، ويُشكّل مشاريع تتكيف مع الظروف البيئية والثقافية والتنظيمية والاقتصادية. وقد أسهم عمله في ترسيخ مكانة Aquatic Architects متخصصاً في التطوير المائي الواقعي، من المفاهيم الحضرية التكيفية إلى المنصات العائمة والمساكن القابلة للنشر.",
       stats:[{k:"YEARS",k_ar:"سنوات",v:"17+"},{k:"PROJECTS",k_ar:"مشاريع",v:"42"},{k:"PATENTS",k_ar:"براءات",v:"3"}],
@@ -1272,7 +1243,7 @@
     {
       num:"02", name:"Ahmad Ataya", role:"Founding Partner",
       role_ar:"الشريك المؤسس",
-      img:"assets/ataya (upscaled).jpeg",
+      img: viteAssetUrl('team-attaya-src'),
       bio:"Founding Partner of Aquatic Architects, Ahmad Ataya leads the company's strategic communications, partnerships, and commercial positioning. He supports the growth and development of Aquatic Architects' floating real estate and water based infrastructure portfolio, helping translate its design vision into market ready opportunities.",
       bio_ar:"الشريك المؤسس لـ Aquatic Architects، يقود أحمد عطية الاتصالات الاستراتيجية للشركة وشراكاتها وتموضعها التجاري. يدعم نمو وتطوير محفظة Aquatic Architects في العقارات العائمة والبنية التحتية المائية، مساهماً في ترجمة رؤيتها التصميمية إلى فرص جاهزة للسوق.",
       stats:[{k:"YEARS",k_ar:"سنوات",v:"—"},{k:"PROJECTS",k_ar:"مشاريع",v:"—"},{k:"AWARDS",k_ar:"جوائز",v:"—"}],
@@ -1440,8 +1411,7 @@
   if (!isMobile) (function(){
     const el = document.createElement('div');
     el.id = 'boat-cursor';
-    const img = new Image();
-    img.src = 'assets/Cursor assets/sss.png';
+    const img = viteAssets.querySelector('#boat-cursor-src').cloneNode(true);
     img.width = 140; img.height = 140; img.alt = '';
     el.appendChild(img);
     document.body.appendChild(el);
@@ -2157,6 +2127,7 @@
 
   if (currentLang === 'ar') setLang('ar');
 </script>
+<script type="module" src="/src/cta-mount.tsx"></script>
 <script type="module">
   if (!window.matchMedia('(pointer:coarse),(max-width:768px)').matches) {
     const { initScene } = await import('/src/scene.js');

@@ -1,10 +1,20 @@
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
 export default defineConfig({
   root: '.',
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src'),
+    },
+  },
+  server: {
+    allowedHosts: true,
+  },
   preview: {
-    // Coolify / sslip.io proxy hostnames (Vite blocks unknown Host headers by default)
-    allowedHosts: ['.sslip.io', 'localhost'],
+    allowedHosts: true,
   },
   build: {
     rollupOptions: {

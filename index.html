@@ -688,7 +688,7 @@
   @media (max-width:768px){
     .model-section{display:block}
     #glbCanvas{display:none}
-    #accVideo{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity 1s ease}
+    #accVideo{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
     .model-intro-inner{padding:0 24px}
     .model-intro-h{font-size:clamp(28px,9vw,48px);margin-top:12px}
     .model-intro-body{font-size:14px;margin-top:16px}
@@ -978,7 +978,7 @@
     </div>
   </div>
   <canvas id="glbCanvas" style="opacity:0;transition:opacity 1.2s ease"></canvas>
-  <video id="accVideo" src="assets/3D/acc vid.mp4" loop muted playsinline preload="auto"></video>
+  <video id="accVideo" src="assets/3D/acc vid.mp4" autoplay loop muted playsinline preload="auto"></video>
   <div class="model-label" style="opacity:0;transition:opacity 1.2s ease 0.4s" data-i18n="model.label2">Acclimation™ — interactive model</div>
 </section>
 
@@ -1652,13 +1652,26 @@
     if (!section || !intro) return;
     const label = section.querySelector('.model-label');
 
+    const accVid = document.getElementById('accVideo');
+
+    // Kick the video on first user touch (iOS autoplay policy)
+    if (accVid) {
+      document.addEventListener('touchstart', function vt() {
+        accVid.muted = true;
+        accVid.play().catch(() => {});
+        document.removeEventListener('touchstart', vt);
+      }, { passive: true });
+    }
+
     let triggered = false;
     function reveal() {
       if (triggered) return;
       const rect = section.getBoundingClientRect();
       if (rect.top >= window.innerHeight || rect.bottom <= 0) return;
       triggered = true;
-      window.removeEventListener('scroll', reveal, true);
+
+      // Ensure video is playing when intro starts
+      if (accVid) { accVid.muted = true; accVid.play().catch(() => {}); }
 
       intro.classList.add('visible');
 
@@ -1666,17 +1679,15 @@
         intro.classList.add('hide');
         canvas.style.opacity = '1';
         if (label) label.style.opacity = '1';
-        const accVid = document.getElementById('accVideo');
-        if (accVid) {
-          accVid.muted = true;
-          accVid.style.opacity = '1';
-          accVid.play().catch(() => {});
-        }
+        // Play again in case it was blocked
+        if (accVid) accVid.play().catch(() => {});
       }, 3200);
     }
 
-    window.addEventListener('scroll', reveal, { passive: true, capture: true });
-    reveal(); // fire immediately if section already in view
+    // Trigger on scroll, touch-move, and immediately
+    window.addEventListener('scroll',    reveal, { passive: true });
+    window.addEventListener('touchmove', reveal, { passive: true });
+    reveal();
   })();
 
   // ---- Burger / mobile nav ----

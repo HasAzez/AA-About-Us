@@ -175,13 +175,26 @@ export function initScene() {
 
       if (gltf.animations && gltf.animations.length) {
         mixer = new THREE.AnimationMixer(model);
-        // Find modal duration so the one 120-frame outlier loops in sync with the rest
+        // Most clips are 95 frames; Variation1.096Action is 120. Trim outliers by
+        // cutting keyframes beyond the modal duration so all clips loop in sync.
         const sorted = gltf.animations.map(c => c.duration).sort((a, b) => a - b);
         const modal  = sorted[Math.floor(sorted.length / 2)];
         gltf.animations.forEach((clip) => {
-          const action = mixer.clipAction(clip);
-          if (Math.abs(clip.duration - modal) > 0.1) action.setDuration(modal);
-          action.play();
+          let c = clip;
+          if (clip.duration > modal + 0.1) {
+            c = clip.clone();
+            c.duration = modal;
+            c.tracks.forEach(track => {
+              const sz = track.getValueSize();
+              let end = track.times.length;
+              for (let i = 0; i < track.times.length; i++) {
+                if (track.times[i] >= modal) { end = i; break; }
+              }
+              track.times  = track.times.slice(0, end);
+              track.values = track.values.slice(0, end * sz);
+            });
+          }
+          mixer.clipAction(c).play();
         });
       }
     },

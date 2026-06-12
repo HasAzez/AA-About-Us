@@ -58,8 +58,8 @@ export function initScene() {
   keyLight.shadow.camera.right     =  500;
   keyLight.shadow.camera.top       =  500;
   keyLight.shadow.camera.bottom    = -500;
-  keyLight.shadow.bias             = -0.001;
-  keyLight.shadow.normalBias       =  0.02;
+  keyLight.shadow.bias             = -0.0003;
+  keyLight.shadow.normalBias       =  0.06;
   scene.add(keyLight);
 
   const fillLight = new THREE.DirectionalLight(0xffffff, 0.35);
@@ -74,9 +74,10 @@ export function initScene() {
 
   // 2. Ambient occlusion
   const ssaoPass = new SSAOPass(scene, camera, W, H);
-  ssaoPass.kernelRadius = 12;
-  ssaoPass.minDistance  = 0.002;
-  ssaoPass.maxDistance  = 0.08;
+  ssaoPass.kernelRadius = 6;
+  ssaoPass.minDistance  = 0.001;
+  ssaoPass.maxDistance  = 0.03;
+  ssaoPass.enabled = false;
   composer.addPass(ssaoPass);
 
   // 3. Final colour-space output
@@ -93,27 +94,19 @@ export function initScene() {
   const camTarget  = new THREE.Vector3();
   let camState = 0;
 
-  // ---- Hover highlight ----
-  const raycaster    = new THREE.Raycaster();
-  const mouse        = new THREE.Vector2();
-  let hoveredMesh    = null;
-  let origMat        = null;
-  const highlightMat = new THREE.MeshBasicMaterial({ color: 0x43E656 });
-  const hoverSkip    = new Set();
+  // ---- Hover (cursor only, no colour highlight) ----
+  const raycaster = new THREE.Raycaster();
+  const mouse     = new THREE.Vector2();
+  const hoverSkip = new Set();
 
   function restoreHovered() {
-    if (hoveredMesh && origMat) {
-      hoveredMesh.material = origMat;
-      hoveredMesh = null;
-      origMat = null;
-      canvas.style.cursor = '';
-    }
+    canvas.style.cursor = '';
   }
 
   // ---- GLB loader ----
   const loader = new GLTFLoader();
   loader.load(
-    'assets/3D/Acclimation-Animation.glb',
+    'assets/3D/Acclimation-Animation2.glb',
     (gltf) => {
       const model = gltf.scene;
       scene.add(model);
@@ -153,6 +146,13 @@ export function initScene() {
       camFront.set(0, fd * 0.18, fd);
       camTarget.copy(camDefault);
 
+      const uniformMat = new THREE.MeshStandardMaterial({
+        color:     0xffffff,
+        roughness: 0.35,
+        metalness: 0.0,
+        side:      THREE.DoubleSide,
+      });
+
       model.traverse((child) => {
         if (!child.isMesh) return;
         child.castShadow    = true;
@@ -163,8 +163,13 @@ export function initScene() {
         b.getSize(s);
         const name      = (child.name || '').toLowerCase();
         const footprint = Math.max(s.x, s.z);
-        if (/plane|ground|floor|shadow/i.test(name) || footprint > span * 0.6) {
+        const isGround  = /plane|ground|floor|shadow/i.test(name) || footprint > span * 0.6;
+
+        if (isGround) {
+          child.visible = false;
           hoverSkip.add(child);
+        } else {
+          child.material = uniformMat;
         }
       });
 
@@ -191,12 +196,6 @@ export function initScene() {
     const hits = raycaster.intersectObjects(targets, false);
 
     if (hits.length === 0) { restoreHovered(); return; }
-    const m = hits[0].object;
-    if (m === hoveredMesh) return;
-    restoreHovered();
-    origMat = m.material;
-    m.material = highlightMat;
-    hoveredMesh = m;
     canvas.style.cursor = 'pointer';
   });
 

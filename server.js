@@ -48,11 +48,14 @@ function serveFile(req, res, filePath, next) {
       });
       fs.createReadStream(filePath, { start: start, end: end }).pipe(res);
     } else {
-      res.writeHead(200, {
+      var noCache = ext === '.html' || ext === '.js';
+      var headers = {
         'Content-Type':   mime,
         'Content-Length': stat.size,
         'Accept-Ranges':  'bytes',
-      });
+      };
+      if (noCache) headers['Cache-Control'] = 'no-store';
+      res.writeHead(200, headers);
       fs.createReadStream(filePath).pipe(res);
     }
   });

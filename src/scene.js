@@ -175,8 +175,13 @@ export function initScene() {
 
       if (gltf.animations && gltf.animations.length) {
         mixer = new THREE.AnimationMixer(model);
+        // Find modal duration so the one 120-frame outlier loops in sync with the rest
+        const sorted = gltf.animations.map(c => c.duration).sort((a, b) => a - b);
+        const modal  = sorted[Math.floor(sorted.length / 2)];
         gltf.animations.forEach((clip) => {
-          mixer.clipAction(clip).play();
+          const action = mixer.clipAction(clip);
+          if (Math.abs(clip.duration - modal) > 0.1) action.setDuration(modal);
+          action.play();
         });
       }
     },

@@ -688,7 +688,7 @@
   @media (max-width:768px){
     .model-section{display:block}
     #glbCanvas{display:none}
-    #accVideo{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    #accVideo{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity 1s ease}
     .hero-caustic-svg{display:none}
     #greenRippleBar{display:none}
     #hero-mask{display:none}
@@ -1664,10 +1664,14 @@
           canvas.style.opacity = '1';
           if (label) label.style.opacity = '1';
           const accVid = document.getElementById('accVideo');
-          if (accVid) { accVid.muted = true; accVid.play().catch(() => {}); }
+          if (accVid) {
+            accVid.muted = true;
+            accVid.style.opacity = '1';
+            accVid.play().catch(() => {});
+          }
         }, 3200);
       }
-    }, { threshold: 0.4 });
+    }, { threshold: 0.15 });
 
     observer.observe(section);
   })();

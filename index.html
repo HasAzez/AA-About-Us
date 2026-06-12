@@ -975,7 +975,7 @@
     </div>
   </div>
   <canvas id="glbCanvas" style="opacity:0;transition:opacity 1.2s ease"></canvas>
-  <video id="accVideo" src="assets/3D/acc vid.mp4" autoplay loop muted playsinline preload="auto"></video>
+  <video id="accVideo" src="assets/3D/acc vid.mp4" loop muted playsinline preload="auto"></video>
   <div class="model-label" style="opacity:0;transition:opacity 1.2s ease 0.4s" data-i18n="model.label2">Acclimation™ — interactive model</div>
 </section>
 
@@ -1392,15 +1392,6 @@
     if (y < 1000 && hero) hero.style.setProperty('--py', (y*0.15)+'px');
   }, {passive:true});
 
-  // ---- Mobile: play acc section video ----
-  if (isMobile) {
-    const accVid = document.getElementById('accVideo');
-    if (accVid) {
-      accVid.muted = true;
-      accVid.play().catch(() => {});
-      document.addEventListener('touchstart', () => accVid.play().catch(() => {}), {once:true, passive:true});
-    }
-  }
 
   // ---- Mobile: play hero video directly ----
   if (isMobile) {
@@ -1667,11 +1658,13 @@
         // Step 1: show text
         intro.classList.add('visible');
 
-        // Step 2: after 3.2s, fade text out and reveal canvas
+        // Step 2: after 3.2s, fade text out and reveal canvas/video
         setTimeout(() => {
           intro.classList.add('hide');
           canvas.style.opacity = '1';
           if (label) label.style.opacity = '1';
+          const accVid = document.getElementById('accVideo');
+          if (accVid) { accVid.muted = true; accVid.play().catch(() => {}); }
         }, 3200);
       }
     }, { threshold: 0.4 });

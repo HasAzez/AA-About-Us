@@ -6,7 +6,7 @@
 <title>Aquatic Architects — About</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700&family=Overpass:wght@300;400;500;700&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&family=Overpass:wght@300;400;500;700&family=Oswald:wght@300;400;500&display=swap" rel="stylesheet" />
 <style>
   :root{
     --ink:#0c0f0f;
@@ -356,6 +356,7 @@
   /* 3D model section */
   .model-section{background:#000;padding:0;height:100vh;position:relative;overflow:hidden}
   #glbCanvas{width:100%;height:100%;display:block;pointer-events:auto;touch-action:pan-y}
+  #accVideo{display:none}
   .model-label{position:absolute;bottom:40px;left:50px;font-family:"Oswald";font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(4,202,130,0.6);pointer-events:none}
 
   .model-intro{
@@ -653,13 +654,19 @@
     .purpose-statement{font-size:36px}
     .foot-grid{grid-template-columns:repeat(2,1fr);gap:40px}
     .burger{top:18px;right:35px}
-    .lang-toggle{top:18px;left:35px;padding:0 16px}
     .hero-content .wordmark{font-size:12px;letter-spacing:.5em}
   }
 
   /* Large mobile */
   @media (max-width:768px){
-    .model-section{display:none}
+    .model-section{display:block}
+    #glbCanvas{display:none}
+    #accVideo{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+    .model-intro-inner{padding:0 24px}
+    .model-intro-label{display:none}
+    .model-label{display:none}
+    .model-intro-h{font-size:clamp(28px,9vw,48px);margin-top:12px}
+    .model-intro-body{font-size:14px;margin-top:16px}
     .hero-caustic-svg{display:none}
     #greenRippleBar{display:none}
     #hero-mask{display:none}
@@ -667,7 +674,6 @@
     .hero{background:none;background-color:#0c0f0f}
     .pw{color:#fff}
     .pw[data-hi="1"]{color:var(--aqua)}
-    .partner-ribbon{display:none}
     .hero-gauge{display:none}
     .logo-stage{width:80vw;height:auto}
     .logo-img{width:60vw}
@@ -686,10 +692,11 @@
     .purpose-inner{text-align:center}
     .focus-card{padding:32px 24px 100px;min-height:auto}
     .card{height:420px}
+    .card:hover .card-inner{transform:none}
+    .card.flipped .card-inner{transform:rotateY(180deg)}
     .clients-grid{grid-template-columns:repeat(2,1fr)}
     .client{aspect-ratio:1.4/1}
     .foot-grid{grid-template-columns:repeat(2,1fr);gap:32px}
-    .lang-toggle{top:14px;left:20px;padding:0 12px;height:38px;font-size:9px;letter-spacing:.12em}
     .scroll-progress{height:1px}
   }
 
@@ -701,6 +708,7 @@
     .section-head{margin-bottom:48px}
     .hero-frame{inset:14px 18px}
     .hero-bottom{padding:0 20px;font-size:11px}
+    .scroll-cue{display:none}
     .logo-stage{width:90vw;height:auto}
     .logo-img{width:65vw}
     #hero-tagline{display:none}
@@ -732,7 +740,6 @@
   /* Small phone */
   @media (max-width:480px){
     .burger{top:12px;right:12px}
-    .lang-toggle{top:12px;left:12px;padding:0 10px;height:36px;font-size:8px}
     .section{padding:60px 16px}
     .section-h1{font-size:30px}
     .hero-cutout-frame{width:90%;height:44%;border-radius:14px}
@@ -753,88 +760,6 @@
     .foot-col a,.foot-col p{font-size:13px}
   }
 
-  /* ---- Language toggle ---- */
-  .lang-toggle{
-    position:fixed;top:22px;left:50px;z-index:99998;
-    padding:0 18px;height:42px;
-    display:grid;place-items:center;
-    border:1px solid rgba(255,255,255,0.25);
-    background:rgba(0,0,0,0.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-    color:#fff;font-family:"Montserrat",sans-serif;font-size:11px;letter-spacing:.14em;
-    text-transform:uppercase;cursor:pointer;
-    transition:border-color .25s,background .25s;
-  }
-  .lang-toggle:hover{border-color:var(--aqua-soft);background:rgba(4,202,130,0.12)}
-  .lang-toggle.hidden{opacity:0;visibility:hidden;pointer-events:none}
-
-  /* ---- Arabic / RTL overrides ---- */
-
-  /* Cairo font for all text elements */
-  [dir="rtl"] body,[dir="rtl"] button,[dir="rtl"] input,
-  [dir="rtl"] p,[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4,
-  [dir="rtl"] .label,[dir="rtl"] .section-num,[dir="rtl"] .section-h1,
-  [dir="rtl"] .vision-p,[dir="rtl"] .vision-num,[dir="rtl"] .focus-title,
-  [dir="rtl"] .focus-desc,[dir="rtl"] .team-intro,[dir="rtl"] .bio,[dir="rtl"] .role,
-  [dir="rtl"] .cta-h,[dir="rtl"] .cta-eyebrow,[dir="rtl"] .model-intro-h,
-  [dir="rtl"] .model-intro-body,[dir="rtl"] .purpose-statement,
-  [dir="rtl"] .mobile-nav-drawer a,[dir="rtl"] .mobile-nav-tag,
-  [dir="rtl"] .foot-col a,[dir="rtl"] .foot-col p,[dir="rtl"] .foot-col h4,
-  [dir="rtl"] .foot-bottom,[dir="rtl"] #hero-subtext,[dir="rtl"] #hero-tagline{
-    font-family:"Cairo",sans-serif;
-  }
-
-  /* Zero out Latin letter-spacing for Arabic */
-  [dir="rtl"] .label,[dir="rtl"] .section-num,[dir="rtl"] .vision-num,
-  [dir="rtl"] .focus-title,[dir="rtl"] .focus-desc,[dir="rtl"] .team-intro,
-  [dir="rtl"] .bio,[dir="rtl"] .role,[dir="rtl"] .mobile-nav-tag,
-  [dir="rtl"] .foot-col a,[dir="rtl"] .foot-col p,[dir="rtl"] .foot-col h4,
-  [dir="rtl"] .foot-bottom,[dir="rtl"] .model-intro-body,
-  [dir="rtl"] #hero-subtext,[dir="rtl"] .cta-eyebrow{letter-spacing:0}
-  [dir="rtl"] .section-h1,[dir="rtl"] .cta-h,[dir="rtl"] .purpose-statement,
-  [dir="rtl"] .model-intro-h,[dir="rtl"] #hero-tagline{letter-spacing:-.01em}
-
-  /* Right-align all content text — the core RTL fix */
-  [dir="rtl"] p,[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4,
-  [dir="rtl"] .label,[dir="rtl"] .section-num,[dir="rtl"] .vision-num,
-  [dir="rtl"] .vision-p,[dir="rtl"] .focus-title,[dir="rtl"] .focus-desc,
-  [dir="rtl"] .team-intro,[dir="rtl"] .bio,[dir="rtl"] .role,
-  [dir="rtl"] .cta-eyebrow,[dir="rtl"] .mobile-nav-drawer a,
-  [dir="rtl"] .mobile-nav-tag,[dir="rtl"] .foot-col,[dir="rtl"] .foot-col *,
-  [dir="rtl"] .arrow,[dir="rtl"] .est,[dir="rtl"] .section-h1{text-align:right}
-
-  /* Fixed-position elements — swap sides */
-  [dir="rtl"] .burger{right:auto;left:50px}
-  [dir="rtl"] .lang-toggle{left:auto;right:50px}
-  [dir="rtl"] .hero-gauge{left:auto;right:50px}
-
-  /* Hero side texts — swap left/right in RTL */
-  [dir="rtl"] #hero-tagline{left:auto;right:3.5%;text-align:right}
-  [dir="rtl"] #hero-subtext{right:auto;left:3.5%;text-align:left}
-
-  /* Mobile nav — slide in from left in RTL */
-  [dir="rtl"] .mobile-nav-drawer{
-    left:0;right:auto;
-    border-left:none;border-right:1px solid var(--line);
-    transform:translateX(-100%);
-  }
-  [dir="rtl"] .mobile-nav.open .mobile-nav-drawer{transform:translateX(0)}
-
-  /* Vision section */
-  [dir="rtl"] .vision-block{padding:48px 28px 48px 0}
-  [dir="rtl"] .vision-block::before{left:auto;right:0}
-  [dir="rtl"] .vision-split-text{border-left:none;border-right:1px solid var(--line)}
-  [dir="rtl"] .vision-split-caption{left:auto;right:24px}
-  [dir="rtl"] .vision-num{align-items:flex-end}
-
-  /* CTA — heading stays centered, rest right-aligns */
-  [dir="rtl"] .cta-h{text-align:center}
-
-  /* Team cards */
-  [dir="rtl"] .flip-hint{right:auto;left:24px}
-  [dir="rtl"] .ribbon{flex-direction:row-reverse}
-
-  /* Wordmark */
-  [dir="rtl"] .wordmark{letter-spacing:0.15em;font-size:12px}
 </style>
 </head>
 <body>
@@ -888,9 +813,6 @@
     <div class="mobile-nav-tag" data-i18n="nav.tag">An aquatic studio — est. 2009</div>
   </div>
 </div>
-
-<!-- Language toggle -->
-<button class="lang-toggle" id="langToggle" aria-label="Switch language">عربي</button>
 
 <!-- BURGER (fixed, hero-only) -->
 <button class="burger" aria-label="Menu"><span></span></button>
@@ -995,6 +917,7 @@
       <div class="partner-card"><span class="p-dot"></span>Waterstudio</div>
       <div class="partner-card"><span class="p-dot"></span>BYD</div>
       <div class="partner-card"><span class="p-dot"></span>Illusorr</div>
+      <div class="partner-card"><span class="p-dot"></span>Ministry of Climate Change and Environment</div>
       <!-- set 2 — duplicate for seamless loop -->
       <div class="partner-card"><span class="p-dot"></span>MAF</div>
       <div class="partner-card"><span class="p-dot"></span>Eagle Hills</div>
@@ -1006,6 +929,7 @@
       <div class="partner-card"><span class="p-dot"></span>Waterstudio</div>
       <div class="partner-card"><span class="p-dot"></span>BYD</div>
       <div class="partner-card"><span class="p-dot"></span>Illusorr</div>
+      <div class="partner-card"><span class="p-dot"></span>Ministry of Climate Change and Environment</div>
     </div>
   </div>
 
@@ -1024,6 +948,7 @@
     </div>
   </div>
   <canvas id="glbCanvas" style="opacity:0;transition:opacity 1.2s ease"></canvas>
+  <video id="accVideo" src="assets/3D/acc vid.mp4" autoplay loop muted playsinline preload="auto"></video>
   <div class="model-label" style="opacity:0;transition:opacity 1.2s ease 0.4s" data-i18n="model.label2">Acclimation™ — interactive model</div>
 </section>
 
@@ -1039,7 +964,7 @@
 
     <div class="vision-split reveal">
       <div class="vision-split-img">
-        <img src="assets/Ahmed yousef vision .jpeg" alt="Founder Led Vision" />
+        <img src="assets/founder-vision.jpg" alt="Founder Led Vision" />
         <div class="vision-split-caption"><span class="label" data-i18n="vision.caption">Ahmed Youssef · Founder</span></div>
       </div>
       <div class="vision-split-text">
@@ -1203,8 +1128,8 @@
 
 <template id="vite-assets">
   <img id="boat-cursor-src" src="assets/Cursor assets/sss.png" alt="">
-  <img id="team-founder-src" src="assets/founder.png" alt="">
-  <img id="team-attaya-src" src="assets/attaya.png" alt="">
+  <img id="team-founder-src" src="assets/Ahmed yousef vision .jpeg" alt="">
+  <img id="team-attaya-src" src="assets/ataya (upscaled).jpeg" alt="">
 </template>
 
 <script>
@@ -1236,8 +1161,7 @@
       role_ar:"المؤسس والمعماري الرئيسي",
       img: viteAssetUrl('team-founder-src'), bgPos:"center 15%",
       bio:"Ahmed Youssef is the Founding Partner and Principal Architect of Aquatic Architects. After being awarded the Future Urban Thinkers competition by Dubai Land Department, he founded Aquatic Architects as a specialized studio focused on floating architecture and urban planning beyond the waterfront, originating from the MENA region. He is the creator of the patented Acclimation methodology, the core philosophy behind the company's work, shaping projects that adapt to environmental, cultural, regulatory, and economic conditions over time. His work has helped position Aquatic Architects as a specialist in real world water based developments, from adaptive urban concepts to deployable floating platforms and residences.",
-      bio_ar:"أحمد يوسف هو الشريك المؤسس والمعماري الرئيسي لـ Aquatic Architects. بعد فوزه بمسابقة المفكرين الحضريين المستقبليين التي نظمتها دائرة الأراضي والأملاك في دبي، أسس Aquatic Architects كاستوديو متخصص في العمارة العائمة والتخطيط الحضري، منبثقاً من منطقة الشرق الأوسط وشمال أفريقيا. وهو مبتكر منهجية Acclimation المسجلة، الفلسفة الجوهرية التي تقوم عليها أعمال الشركة، ويُشكّل مشاريع تتكيف مع الظروف البيئية والثقافية والتنظيمية والاقتصادية. وقد أسهم عمله في ترسيخ مكانة Aquatic Architects متخصصاً في التطوير المائي الواقعي، من المفاهيم الحضرية التكيفية إلى المنصات العائمة والمساكن القابلة للنشر.",
-      stats:[{k:"YEARS",k_ar:"سنوات",v:"17+"},{k:"PROJECTS",k_ar:"مشاريع",v:"42"},{k:"PATENTS",k_ar:"براءات",v:"3"}],
+      stats:[{k:"YEARS",v:"17+"},{k:"PROJECTS",v:"42"},{k:"PATENTS",v:"3"}],
       links:[{label:"LinkedIn",href:"https://ae.linkedin.com/in/ahmed-youssef-81588571"},{label:"Mail",href:"mailto:ahmed.y@aa-ds.com"}]
     },
     {
@@ -1245,16 +1169,12 @@
       role_ar:"الشريك المؤسس",
       img: viteAssetUrl('team-attaya-src'),
       bio:"Founding Partner of Aquatic Architects, Ahmad Ataya leads the company's strategic communications, partnerships, and commercial positioning. He supports the growth and development of Aquatic Architects' floating real estate and water based infrastructure portfolio, helping translate its design vision into market ready opportunities.",
-      bio_ar:"الشريك المؤسس لـ Aquatic Architects، يقود أحمد عطية الاتصالات الاستراتيجية للشركة وشراكاتها وتموضعها التجاري. يدعم نمو وتطوير محفظة Aquatic Architects في العقارات العائمة والبنية التحتية المائية، مساهماً في ترجمة رؤيتها التصميمية إلى فرص جاهزة للسوق.",
-      stats:[{k:"YEARS",k_ar:"سنوات",v:"—"},{k:"PROJECTS",k_ar:"مشاريع",v:"—"},{k:"AWARDS",k_ar:"جوائز",v:"—"}],
+      stats:[{k:"YEARS",v:"—"},{k:"PROJECTS",v:"—"},{k:"AWARDS",v:"—"}],
       links:[{label:"LinkedIn",href:"https://ae.linkedin.com/in/ahmad-ataya-a2a4b021b"},{label:"Mail",href:"mailto:ahmad.ataya@aa-ds.com"}]
     }
   ];
 
   function makeCard(p, i){
-    const ar = currentLang === 'ar';
-    const role = ar && p.role_ar ? p.role_ar : p.role;
-    const bio  = ar && p.bio_ar  ? p.bio_ar  : p.bio;
     const photo = p.img
       ? `<div class="ph" style="--bg:url('${p.img}');--bg-pos:${p.bgPos||'center'}"></div>`
       : `<div class="placeholder">[ portrait — drop ${p.name.split(' ')[0]} headshot ]</div>`;
@@ -1265,21 +1185,21 @@
             <div class="ribbon"><span><span class="dot"></span>Aquatic Architects</span><span>${p.num}/${String(team.length).padStart(2,'0')}</span></div>
             <div class="flip-hint">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 12a9 9 0 0118-1"/><path d="M21 4v5h-5"/><path d="M21 12a9 9 0 01-18 1"/><path d="M3 20v-5h5"/></svg>
-              ${ar ? 'اقلب' : 'Flip'}
+              Flip
             </div>
             <div class="face-photo">${photo}</div>
             <div class="face-meta">
               <div>
                 <h3>${p.name}</h3>
-                <div class="role">${role}</div>
+                <div class="role">${p.role}</div>
               </div>
             </div>
           </div>
           <div class="face face-back">
-            <div class="topline"><span>${p.num} — ${ar ? 'الملف' : 'Profile'}</span><span>AA / ${ar ? 'سيرة' : 'Bio'}</span></div>
+            <div class="topline"><span>${p.num} — Profile</span><span>AA / Bio</span></div>
             <h3>${p.name}</h3>
-            <div class="role">${role}</div>
-            <p class="bio">${bio}</p>
+            <div class="role">${p.role}</div>
+            <p class="bio">${p.bio}</p>
             <div class="links">${p.links.map(l => `<a href="${l.href}"${l.href.startsWith('http') ? ' target="_blank" rel="noopener"' : ''}>${l.label}</a>`).join('')}</div>
           </div>
         </div>
@@ -1297,10 +1217,9 @@
   });
 
   // ---- Scroll progress + burger visibility ----
-  const prog       = document.getElementById('progress');
-  const burger     = document.querySelector('.burger');
-  const langToggle = document.getElementById('langToggle');
-  const heroEl     = document.querySelector('.hero');
+  const prog   = document.getElementById('progress');
+  const burger = document.querySelector('.burger');
+  const heroEl = document.querySelector('.hero');
   function onScroll(){
     const h = document.documentElement;
     const top = h.scrollTop;
@@ -1309,7 +1228,6 @@
     if (heroEl) {
       const pastHero = top > heroEl.offsetHeight - 60;
       burger.classList.toggle('hidden', pastHero);
-      langToggle.classList.toggle('hidden', pastHero);
     }
   }
   window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
@@ -1454,6 +1372,7 @@
     const hero = document.querySelector('.hero');
     if (y < 1000 && hero) hero.style.setProperty('--py', (y*0.15)+'px');
   }, {passive:true});
+
 
   // ---- Mobile: play hero video directly ----
   if (isMobile) {
@@ -1705,32 +1624,48 @@
 
   // ---- 3D model intro sequence ----
   (function(){
-    if (isMobile) return;
     const section = document.getElementById('glbSection');
     const intro   = document.getElementById('modelIntro');
     const canvas  = document.getElementById('glbCanvas');
-    const label   = section.querySelector('.model-label');
     if (!section || !intro) return;
+    const label = section.querySelector('.model-label');
+
+    const accVid = document.getElementById('accVideo');
+
+    // Kick the video on first user touch (iOS autoplay policy)
+    if (accVid) {
+      document.addEventListener('touchstart', function vt() {
+        accVid.muted = true;
+        accVid.play().catch(() => {});
+        document.removeEventListener('touchstart', vt);
+      }, { passive: true });
+    }
 
     let triggered = false;
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting && !triggered) {
-        triggered = true;
-        observer.disconnect();
+    function reveal() {
+      if (triggered) return;
+      const rect = section.getBoundingClientRect();
+      if (rect.top >= window.innerHeight || rect.bottom <= 0) return;
+      triggered = true;
 
-        // Step 1: show text
-        intro.classList.add('visible');
+      // Ensure video is playing when intro starts
+      if (accVid) { accVid.muted = true; accVid.play().catch(() => {}); }
 
-        // Step 2: after 3.2s, fade text out and reveal canvas
-        setTimeout(() => {
-          intro.classList.add('hide');
-          canvas.style.opacity = '1';
-          if (label) label.style.opacity = '1';
-        }, 3200);
-      }
-    }, { threshold: 0.4 });
+      intro.classList.add('visible');
 
-    observer.observe(section);
+      setTimeout(() => {
+        intro.classList.add('hide');
+        canvas.style.opacity = '1';
+        if (label) label.style.opacity = '1';
+        // Play again in case it was blocked
+        if (accVid) accVid.play().catch(() => {});
+      }, 3200);
+    }
+
+    // Trigger on scroll, touch-move, and immediately
+    window.addEventListener('scroll',    reveal, { passive: true });
+    window.addEventListener('touchmove', reveal, { passive: true });
+    reveal();
   })();
 
   // ---- Burger / mobile nav ----
@@ -1989,143 +1924,6 @@
     tickGreen();
   })();
 
-  // ---- i18n / Language toggle ----
-  const TRANSLATIONS = {
-    en: {
-      'nav.projects':'Projects','nav.about':'About','nav.media':'Media &amp; Awards','nav.contact':'Contact',
-      'nav.tag':'An aquatic studio — est. 2009',
-      'hero.tl.sm':'<span class="tl-word">The</span>',
-      'hero.tl.lg':'<span class="tl-word"><em>Ocean</em></span>',
-      'hero.tl.md':'<span class="tl-word">Is</span><span class="tl-word"> Our</span><span class="tl-word"> Blueprint</span>',
-      'hero.subtext':'A UAE born aquatic architecture firm shaping <em>climate responsive</em> floating architecture and water based infrastructure.',
-      'hero.est':'Founded MMIX · Patented Acclimation™ methodology',
-      'hero.scroll':'Scroll for more',
-      'model.label':'Acclimation™ — Interactive Model',
-      'model.h':'ACCLIMATION THROUGH<br/><em>ADAPTIVE CITY</em>',
-      'model.body':'An interactive model exploring how Aquatic Architects\' Acclimation methodology shapes adaptive urban developments on water.',
-      'model.label2':'Acclimation™ — interactive model',
-      'vision.label':'01 — Our Vision',
-      'vision.h':'A Founder Led Vision<br/>for <em>Life on Water</em>',
-      'vision.caption':'Ahmed Youssef · Founder',
-      'vision.quote':'A belief that architecture on water must do more than float. It must <em>adapt, perform, and evolve</em> with the world around it.',
-      'vision.stat1':'Years of practice','vision.stat2':'Projects delivered','vision.stat3':'Patents held',
-      'vision.origin':'Origin','vision.catalyst':'Catalyst','vision.method':'Methodology','vision.apply':'Application',
-      'vision.p1':'Aquatic Architects was shaped by Ahmed Youssef\'s belief that architecture on water must do more than float. It must adapt, perform, and evolve with the conditions around it. Long before Acclimation became a patented and award winning methodology, it began as a vision for how the built environment could behave more like a living system, capable of responding to climate, movement, human behavior, regulation, and long term economic value.',
-      'vision.p2':'This thinking was first expressed through the <strong>Adaptive City</strong> project, which explored how cities could expand, contract, open, close, and recalibrate over time rather than remain fixed and rigid. For Ahmed, water was not a constraint to be engineered around. <em>It was a new habitat for urban growth,</em> one that could unlock mobility, flexibility, resource efficiency, and new ways of living.',
-      'vision.p3':'From this foundation, <strong>Acclimation</strong> became the core methodology of Aquatic Architects. It reframes architecture as a responsive system rather than a static object, guiding how environments are conceived, structured, and deployed across environmental, cultural, regulatory, and economic conditions. The methodology draws from the logic of natural adaptation, where organisms evolve anatomically, physiologically, and behaviorally in response to their habitat.',
-      'vision.p4':'Applied to architecture, this means creating water based environments that are not only visually distinctive, but capable of maintaining performance, relevance, safety, comfort, and identity over time. This is the philosophy behind Aquatic Architects\' work, from <strong>Adaptive City</strong> to <strong>Aqua Pod</strong> and <strong>Lapillus</strong>, translating ambitious ideas into real world projects designed for deployment, not speculation.',
-      'purpose.label':'02 — Our Purpose',
-      'purpose.stmt':'To advance adaptive architecture on water through <em>Acclimation,</em> creating built environments that respond to environmental, cultural, regulatory, and economic conditions over time.',
-      'focus.label':'03 — Our Core Focus','focus.h':'Four pillars,<br/>one <em>discipline</em>.','focus.num':'/ 04 areas of practice',
-      'focus.t1':'Adaptive','focus.d1':'A conceptual model of Acclimation showing how adaptive floating cities can shift, respond, and evolve with environmental, cultural, regulatory, and economic conditions.',
-      'focus.t2':'Environmental','focus.d2':'Integrating natural systems into every design decision, ensuring harmony between built environments and surrounding water conditions.',
-      'focus.t3':'Context Driven','focus.d3':'Each project is shaped by its climate, culture, regulations, commercial model, and intended use.',
-      'focus.t4':'Built to Evolve','focus.d4':'Our work is designed for real world deployment, long term performance, and future adaptation.',
-      'common.readmore':'Read more',
-      'team.label':'04 — Our Team','team.h':'Trusted by clients and partners shaping the future of <em>life on water.</em>',
-      'team.intro':'Aquatic Architects works with developers, government entities, hospitality groups, private clients, and strategic partners across floating architecture, water based infrastructure, and coastal development.',
-      'clients.label':'05 — Our Partners','clients.h':'Trusted across<br/>aquatic and <em>coastal</em> development.',
-      'clients.desc':'A proven client base from sovereign developers and hospitality groups to private commissions and research institutions.',
-      'cta.eyebrow':'06 — Begin a project','cta.h':'Share your<br/><em>vision.</em>','cta.btn':'Get in touch',
-      'foot.desc':'Since 2017, redefining life on water from the UAE to the world.',
-      'foot.studio':'Navigation','foot.home':'Home','foot.about':'About','foot.projects':'Projects','foot.media':'Media &amp; Awards','foot.contact':'Contact',
-      'foot.contact.h':'Contact','foot.follow':'Follow',
-      'foot.copy':'© 2026 Aquatic Architects. All rights reserved.',
-      'foot.terms':'Terms &amp; conditions','foot.privacy':'Privacy policy',
-    },
-    ar: {
-      'nav.projects':'مشاريع','nav.about':'من نحن','nav.media':'الإعلام والجوائز','nav.contact':'تواصل معنا',
-      'nav.tag':'استوديو مائي — تأسس 2009',
-      'hero.tl.sm':'<span class="tl-word">الـ</span>',
-      'hero.tl.lg':'<span class="tl-word"><em>محيط</em></span>',
-      'hero.tl.md':'<span class="tl-word">هو</span><span class="tl-word"> نموذجنا</span>',
-      'hero.subtext':'شركة إماراتية متخصصة في العمارة المائية، تُشكّل مستقبل الهياكل العائمة <em>المستجيبة للمناخ</em> والبنية التحتية المائية.',
-      'hero.est':'تأسست MMIX · منهجية Acclimation™ المسجلة',
-      'hero.scroll':'تمرير للمزيد',
-      'model.label':'Acclimation™ — نموذج تفاعلي',
-      'model.h':'Acclimation من خلال<br/><em>المدينة التكيفية</em>',
-      'model.body':'نموذج تفاعلي يستكشف كيف تُشكّل منهجية Acclimation لدى Aquatic Architects التطورات الحضرية التكيفية على الماء.',
-      'model.label2':'Acclimation™ — نموذج تفاعلي',
-      'vision.label':'01 — رؤيتنا',
-      'vision.h':'رؤية يقودها المؤسس<br/>لـ<em>حياة على الماء</em>',
-      'vision.caption':'أحمد يوسف · المؤسس',
-      'vision.quote':'إيمان بأن العمارة على الماء يجب أن تتجاوز مجرد الطفو. يجب أن <em>تتكيف، وتؤدي، وتتطور</em> مع العالم من حولها.',
-      'vision.stat1':'سنوات ممارسة','vision.stat2':'مشروع منجز','vision.stat3':'براءات اختراع',
-      'vision.origin':'النشأة','vision.catalyst':'المحفّز','vision.method':'المنهجية','vision.apply':'التطبيق',
-      'vision.p1':'شُكّلت Aquatic Architects بفضل إيمان أحمد يوسف بأن العمارة على الماء يجب أن تتجاوز مجرد الطفو، وأن تتكيف وتؤدي وتتطور مع الظروف المحيطة بها. قبل أن تصبح Acclimation منهجية مسجلة وحائزة على جوائز، بدأت كرؤية لكيفية تصرف البيئة المبنية كنظام حيوي قادر على الاستجابة للمناخ والحركة والسلوك البشري والتشريع والقيمة الاقتصادية على المدى البعيد.',
-      'vision.p2':'تجسّد هذا التفكير أولاً من خلال مشروع <strong>المدينة التكيفية (Adaptive City)</strong>، الذي استكشف كيف يمكن للمدن أن تتوسع وتنكمش وتنفتح وتنغلق وتُعيد معايرة نفسها عبر الزمن. بالنسبة لأحمد، لم يكن الماء عقبة تحتاج إلى حل هندسي. <em>كان موطناً جديداً للنمو الحضري،</em> يفتح آفاق التنقل والمرونة وكفاءة الموارد وأساليب حياة مستحدثة.',
-      'vision.p3':'من هذا الأساس، أصبحت <strong>Acclimation</strong> المنهجية الجوهرية لـ Aquatic Architects. إنها تُعيد تأطير العمارة كنظام استجابي لا كجسم ثابت، وتوجّه كيفية تصوّر البيئات وهيكلتها ونشرها عبر الظروف البيئية والثقافية والتنظيمية والاقتصادية. تستلهم المنهجية من منطق التكيف الطبيعي، حيث تتطور الكائنات تشريحياً وفسيولوجياً وسلوكياً استجابةً لبيئتها.',
-      'vision.p4':'تطبيقاً على العمارة، يعني ذلك إنشاء بيئات مائية لا تتميز بصرياً فحسب، بل تحافظ على أدائها وجدواها وسلامتها وراحتها وهويتها بمرور الوقت. هذه هي الفلسفة الكامنة وراء عمل Aquatic Architects، من <strong>المدينة التكيفية</strong> إلى <strong>Aqua Pod</strong> و<strong>Lapillus</strong>، إذ تُترجم أفكاراً طموحة إلى مشاريع واقعية مصممة للتطبيق لا للمضاربة.',
-      'purpose.label':'02 — غايتنا',
-      'purpose.stmt':'تعزيز العمارة التكيفية على الماء من خلال <em>Acclimation،</em> لخلق بيئات مبنية تستجيب للظروف البيئية والثقافية والتنظيمية والاقتصادية على مر الزمن.',
-      'focus.label':'03 — محاور عملنا','focus.h':'أربعة محاور،<br/>تخصص <em>واحد</em>.','focus.num':'/ 04 مجالات ممارسة',
-      'focus.t1':'تكيّفي','focus.d1':'نموذج مفاهيمي لـ Acclimation يُظهر كيف يمكن للمدن العائمة التكيفية أن تتحول وتستجيب وتتطور وفق الظروف البيئية والثقافية والتنظيمية والاقتصادية.',
-      'focus.t2':'بيئي','focus.d2':'دمج الأنظمة الطبيعية في كل قرار تصميمي، لضمان التناغم بين البيئات المبنية وظروف الماء المحيطة بها.',
-      'focus.t3':'يقوده السياق','focus.d3':'يتشكل كل مشروع وفق مناخه وثقافته وأنظمته ونموذجه التجاري والاستخدام المقصود منه.',
-      'focus.t4':'مصمم للتطور','focus.d4':'عملنا مصمم للتطبيق الفعلي والأداء على المدى الطويل والتكيف المستقبلي.',
-      'common.readmore':'اقرأ المزيد',
-      'team.label':'04 — فريقنا','team.h':'موثوق به من عملاء وشركاء يشكّلون مستقبل <em>الحياة على الماء.</em>',
-      'team.intro':'تعمل Aquatic Architects مع المطورين والجهات الحكومية ومجموعات الضيافة والعملاء الخاصين والشركاء الاستراتيجيين في مجالات العمارة العائمة والبنية التحتية المائية والتطوير الساحلي.',
-      'clients.label':'05 — شركاؤنا','clients.h':'موثوق به في<br/>التطوير المائي و<em>الساحلي</em>.',
-      'clients.desc':'قاعدة عملاء راسخة تضم مطورين ذوي سيادة ومجموعات ضيافة وصولاً إلى الأعمال الخاصة والمؤسسات البحثية.',
-      'cta.eyebrow':'06 — ابدأ مشروعاً','cta.h':'شارك<br/><em>رؤيتك.</em>','cta.btn':'تواصل معنا',
-      'foot.desc':'منذ 2017، نُعيد تعريف الحياة على الماء من الإمارات إلى العالم.',
-      'foot.studio':'التنقل','foot.home':'الرئيسية','foot.about':'من نحن','foot.projects':'مشاريع','foot.media':'الإعلام والجوائز','foot.contact':'تواصل معنا',
-      'foot.contact.h':'تواصل','foot.follow':'تابعنا',
-      'foot.copy':'© 2026 Aquatic Architects. جميع الحقوق محفوظة.',
-      'foot.terms':'الشروط والأحكام','foot.privacy':'سياسة الخصوصية',
-    }
-  };
-
-  function setLang(lang) {
-    currentLang = lang;
-    document.documentElement.lang = lang;
-    document.documentElement.dir  = lang === 'ar' ? 'rtl' : 'ltr';
-    const t = TRANSLATIONS[lang];
-
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.dataset.i18n;
-      if (t[key] !== undefined) el.innerHTML = t[key];
-    });
-
-    // Hero tagline: new .tl-word spans have CSS opacity:0 — restore inline visibility
-    // if the scroll animation has already fired (element has .visible class).
-    const heroTaglineEl = document.getElementById('hero-tagline');
-    if (heroTaglineEl && heroTaglineEl.classList.contains('visible')) {
-      heroTaglineEl.querySelectorAll('.tl-word').forEach(w => {
-        w.style.transitionDelay = '0s';
-        w.style.opacity = '1';
-        w.style.transform = 'translateY(0)';
-      });
-    }
-    // Hero subtext: same issue with .sub-word spans; also force element visible.
-    const heroSubtextEl = document.getElementById('hero-subtext');
-    if (heroSubtextEl && heroSubtextEl.classList.contains('visible')) {
-      heroSubtextEl.querySelectorAll('.sub-word').forEach(w => {
-        w.style.transitionDelay = '0s';
-        w.style.opacity = '1';
-        w.style.transform = 'translateY(0)';
-      });
-    }
-
-    // Rebuild team cards with current lang
-    document.getElementById('teamGrid').innerHTML = team.map((p, i) => makeCard(p, i)).join('');
-    document.querySelectorAll('#teamGrid .card').forEach(card => {
-      card.addEventListener('click', () => {
-        if (matchMedia('(hover: none)').matches) card.classList.toggle('flipped');
-      });
-    });
-    document.querySelectorAll('#teamGrid .reveal').forEach(el => io.observe(el));
-
-    document.getElementById('langToggle').textContent = lang === 'ar' ? 'EN' : 'عربي';
-    localStorage.setItem('lang', lang);
-  }
-
-  document.getElementById('langToggle').addEventListener('click', () => {
-    setLang(currentLang === 'en' ? 'ar' : 'en');
-  });
-
-  if (currentLang === 'ar') setLang('ar');
 </script>
 <script type="module" src="/src/cta-mount.tsx"></script>
 <script type="module">

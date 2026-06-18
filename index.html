@@ -1169,6 +1169,12 @@
 
 <script>
   const isMobile = window.matchMedia('(pointer:coarse),(max-width:768px)').matches;
+  if (isMobile) {
+    const hv = document.getElementById('heroVideo');
+    const av = document.getElementById('accVideo');
+    if (hv) hv.src = 'assets/Backgrounds/ocean bg-mobile.mp4';
+    if (av) av.src = 'assets/3D/acc vid-mobile.mp4';
+  }
   // ---- Wordmark stagger ----
   (function(){
     const word = "WHERE WATER IS THE FOUNDATION";

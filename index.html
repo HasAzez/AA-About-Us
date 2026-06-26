@@ -261,8 +261,8 @@
 
   .wordmark{
     margin-top:20px;
-    display:flex;gap:14px;justify-content:center;
-    font-family:"Montserrat";font-weight:200;font-size:14px;letter-spacing:.6em;
+    display:flex;gap:0;justify-content:center;
+    font-family:"Montserrat";font-weight:700;font-size:clamp(9px,1vw,14px);letter-spacing:.25em;
     color:rgba(255,255,255,.85);text-transform:uppercase;
   }
   .wordmark span{
@@ -654,7 +654,7 @@
     .purpose-statement{font-size:36px}
     .foot-grid{grid-template-columns:repeat(2,1fr);gap:40px}
     .burger{top:18px;right:35px}
-    .hero-content .wordmark{font-size:12px;letter-spacing:.5em}
+    .hero-content .wordmark{font-size:12px;letter-spacing:.2em}
   }
 
   /* Large mobile */
@@ -712,7 +712,7 @@
     .logo-stage{width:90vw;height:auto}
     .logo-img{width:65vw}
     #hero-tagline{display:none}
-    .hero-content .wordmark{font-size:11px;letter-spacing:.4em}
+    .hero-content .wordmark{font-size:11px;letter-spacing:.15em}
     .hero-tag{font-size:15px;max-width:90vw}
     .hero-cutout-frame{width:82%;height:48%;border-radius:18px}
     .vision-block{grid-template-columns:1fr;gap:16px;padding:32px 0 32px 20px}
@@ -743,7 +743,7 @@
     .section{padding:60px 16px}
     .section-h1{font-size:30px}
     .hero-cutout-frame{width:90%;height:44%;border-radius:14px}
-    .wordmark{font-size:10px;letter-spacing:.3em;gap:8px}
+    .wordmark{font-size:10px;letter-spacing:.12em;gap:0}
     .hero-tag{font-size:13px}
     .hero-bottom{font-size:10px;bottom:80px}
     .vision-p{font-size:14px;line-height:1.6}
@@ -821,7 +821,7 @@
 <section class="hero" data-screen-label="01 Hero">
   <div id="greenRippleBar" style="position:absolute;top:0;left:0;right:0;height:240px;z-index:10;pointer-events:none;mix-blend-mode:screen;background:linear-gradient(to bottom,rgba(4,202,130,0.55) 0%,rgba(4,202,130,0.18) 40%,rgba(4,202,130,0.04) 75%,transparent 100%);filter:url('#greenRipple')"></div>
   <div class="hero-bg"></div>
-  <video id="heroVideo" src="assets/Backgrounds/ocean bg.mp4" autoplay loop muted playsinline preload="auto"></video>
+  <video id="heroVideo" src="assets/Backgrounds/ocean bg.mp4" autoplay loop muted playsinline preload="metadata"></video>
   <canvas id="hero-mask"></canvas>
 
   <!-- animated water caustics via SVG turbulence -->
@@ -948,7 +948,7 @@
     </div>
   </div>
   <canvas id="glbCanvas" style="opacity:0;transition:opacity 1.2s ease"></canvas>
-  <video id="accVideo" src="assets/3D/acc vid.mp4" autoplay loop muted playsinline preload="auto"></video>
+  <video id="accVideo" src="assets/3D/acc vid.mp4" autoplay loop muted playsinline preload="metadata"></video>
   <div class="model-label" style="opacity:0;transition:opacity 1.2s ease 0.4s" data-i18n="model.label2">Acclimation™ — interactive model</div>
 </section>
 
@@ -964,7 +964,7 @@
 
     <div class="vision-split reveal">
       <div class="vision-split-img">
-        <img src="assets/founder-vision.jpg" alt="Founder Led Vision" />
+        <img src="assets/founder-vision.jpg" alt="Founder Led Vision" loading="lazy" />
         <div class="vision-split-caption"><span class="label" data-i18n="vision.caption">Ahmed Youssef · Founder</span></div>
       </div>
       <div class="vision-split-text">
@@ -1070,16 +1070,16 @@
       <p style="font-family:Montserrat;font-weight:300;font-size:18px;color:var(--fg-2);max-width:380px;line-height:1.55" data-i18n="clients.desc">A proven client base from sovereign developers and hospitality groups to private commissions and research institutions.</p>
     </div>
     <div class="clients-grid reveal">
-      <div class="client"><img src="assets/Logos/MAF.png" alt="Majid Al Futtaim" /></div>
-      <div class="client"><img src="assets/Logos/OCEAYA_BLACK LOGO WHITE BK.jpg" alt="Oceaya" style="filter:invert(1) grayscale(1);mix-blend-mode:screen;opacity:0.5" /></div>
-      <div class="client"><img src="assets/Logos/eagle-hills-0EhBhtWNL0.png" alt="Eagle Hills" style="filter:invert(1) grayscale(1);mix-blend-mode:screen;opacity:0.5" /></div>
-      <div class="client"><img src="assets/Logos/Double Like.webp" alt="Double Like" /></div>
-      <div class="client"><img src="assets/Logos/MOCC.webp" alt="MOCC" style="width:95%;height:110px" /></div>
-      <div class="client"><img src="assets/Logos/waterstudionl-202627.jpg" alt="Waterstudio" style="filter:invert(1) grayscale(1);mix-blend-mode:screen;opacity:0.5;width:90%;height:110px" /></div>
-      <div class="client"><img src="assets/Logos/RTA_Dubai_logo.png" alt="Dubai RTA" /></div>
-      <div class="client"><img src="assets/Logos/BYD_Auto_2022_logo.svg" alt="BYD" /></div>
-      <div class="client"><img src="assets/Logos/SF_Marina_logo_black.webp" alt="SF Marina" /></div>
-      <div class="client"><img src="assets/Logos/Illusorr.png" alt="Illusorr" /></div>
+      <div class="client"><img src="assets/Logos/MAF.png" alt="Majid Al Futtaim" loading="lazy" /></div>
+      <div class="client"><img src="assets/Logos/OCEAYA_BLACK LOGO WHITE BK.jpg" alt="Oceaya" loading="lazy" style="filter:invert(1) grayscale(1);mix-blend-mode:screen;opacity:0.5" /></div>
+      <div class="client"><img src="assets/Logos/eagle-hills-0EhBhtWNL0.png" alt="Eagle Hills" loading="lazy" style="filter:invert(1) grayscale(1);mix-blend-mode:screen;opacity:0.5" /></div>
+      <div class="client"><img src="assets/Logos/Double Like.webp" alt="Double Like" loading="lazy" /></div>
+      <div class="client"><img src="assets/Logos/MOCC.webp" alt="MOCC" loading="lazy" style="width:95%;height:110px" /></div>
+      <div class="client"><img src="assets/Logos/waterstudionl-202627.jpg" alt="Waterstudio" loading="lazy" style="filter:invert(1) grayscale(1);mix-blend-mode:screen;opacity:0.5;width:90%;height:110px" /></div>
+      <div class="client"><img src="assets/Logos/RTA_Dubai_logo.png" alt="Dubai RTA" loading="lazy" /></div>
+      <div class="client"><img src="assets/Logos/BYD_Auto_2022_logo.svg" alt="BYD" loading="lazy" /></div>
+      <div class="client"><img src="assets/Logos/SF_Marina_logo_black.webp" alt="SF Marina" loading="lazy" /></div>
+      <div class="client"><img src="assets/Logos/Illusorr.png" alt="Illusorr" loading="lazy" /></div>
     </div>
   </div>
 </section>
@@ -1091,7 +1091,7 @@
 <footer>
   <div class="foot-grid">
     <div>
-      <img class="foot-logo" src="assets/aa-logo.png" alt="Aquatic Architects" />
+      <img class="foot-logo" src="assets/aa-logo.png" alt="Aquatic Architects" loading="lazy" />
       <p style="color:var(--fg-3);max-width:260px;font-size:13px;line-height:1.55" data-i18n="foot.desc">Since 2017, redefining life on water from the UAE to the world.</p>
     </div>
     <div class="foot-col">
@@ -1137,9 +1137,15 @@
   let currentLang = localStorage.getItem('lang') || 'en';
   const viteAssets = document.getElementById('vite-assets').content;
 
+  if (isMobile) {
+    const hv = document.getElementById('heroVideo');
+    const av = document.getElementById('accVideo');
+    if (hv) hv.src = 'assets/Backgrounds/ocean bg-mobile.mp4';
+    if (av) av.src = 'assets/3D/acc vid-mobile.mp4';
+  }
   // ---- Wordmark stagger ----
   (function(){
-    const word = "AQUATIC  ARCHITECTS";
+    const word = "WHERE WATER IS THE FOUNDATION";
     const root = document.getElementById('wordmark');
     [...word].forEach((c, i) => {
       const s = document.createElement('span');
